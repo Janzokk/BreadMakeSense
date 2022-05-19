@@ -65,11 +65,10 @@ public class MainWindowFX extends Application {
 		bSecond.setText(String.format("Breads/s: %.2f",MainWindowLogic.breads));
 		nBreads.setText("Number of breads: " + MainWindowLogic.breads);
 
-		ImageView bread = new ImageView("file:///home/joel/eclipse-workspace/BreadMakeSense/bread.png");
+		ImageView bread = new ImageView("assets//bread.png");
+
 		clickerVBox = new VBox();
 
-		// This allows to click on transparent areas
-		bread.setPickOnBounds(true);
 		bread.setOnMouseClicked(e -> {
 			MainWindowLogic.addClick();
 			refreshBreads();

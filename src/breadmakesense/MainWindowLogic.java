@@ -38,7 +38,7 @@ public class MainWindowLogic {
 	}
 	
 	public static void calculateBreadsSecond() {
-		breadsPerSecond = (float) (breadsClickAuto*600);
+		breadsPerSecond = breadsClickAuto*60;
 	}
 	
 	
