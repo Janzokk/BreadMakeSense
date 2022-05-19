@@ -12,8 +12,8 @@ create table users (
     id int(4) auto_increment,
     username varchar(35),
     passwd varchar(16) not null,
-    bread bigint(10),
-    legacy_bread bigint(15),
+    bread bigint(10) default 0,
+    legacy_bread bigint(15) default 0,
     ascend float(2),
     constraint pk_user primary key(id, username)
 )
@@ -50,5 +50,3 @@ create table server (
     vers varchar(3) primary key,
     breads bigint default 0
 )
-
-commit;
