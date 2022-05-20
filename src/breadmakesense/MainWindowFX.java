@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 
 public class MainWindowFX extends Application {
 
-	BorderPane bpane;
+	BorderPane bPane;
 	Scene mainScene;
 	HBox menuHBox;
 	VBox clickerVBox;
@@ -26,11 +27,12 @@ public class MainWindowFX extends Application {
 	Button donation;
 	Button ascend;
 	Button ranking;
+	
+	Button[] itemsButtons;
 
-	Button i1;
-	Button i2;
-	Button i3;
-	Button i4;
+	static TextArea infoTextArea;
+
+	String[] itemsInfo;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -39,12 +41,13 @@ public class MainWindowFX extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		bpane = new BorderPane();
-		mainScene = new Scene(bpane, 1280, 720);
+		bPane = new BorderPane();
+		mainScene = new Scene(bPane, 1280, 720);
 
 		inferiorMenu();
 		shop();
 		clickableBread();
+		textArea();
 		MainWindowLogic.initalizeAutoClickTimer();
 
 		stage.setTitle("Bread Make Sense");
@@ -58,11 +61,11 @@ public class MainWindowFX extends Application {
 
 		nBreads = new Label();
 		nBreads.setFont(new Font("Arial", 20));
-		
+
 		bSecond = new Label();
 		bSecond.setFont(new Font("Arial", 16));
 
-		bSecond.setText(String.format("Breads/s: %.2f",MainWindowLogic.breads));
+		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 		nBreads.setText("Number of breads: " + MainWindowLogic.breads);
 
 		ImageView bread = new ImageView("assets//bread.png");
@@ -78,59 +81,108 @@ public class MainWindowFX extends Application {
 		clickerVBox.getChildren().addAll(nBreads, bSecond, bread);
 		clickerVBox.setPrefWidth(400);
 
-		bpane.setLeft(clickerVBox);
+		bPane.setLeft(clickerVBox);
 
 	}
-	
+
 	public void textArea() {
+
+		itemsInfo = new String[MainWindowLogic.items.length];
+
+		itemsInfo[0] = "A minum wage worker that is not into any type of pressure!\n"
+				+ "It's not much, but it's honest work.\n\n"
+				+ "<<Please help me>> - A happy worker\n\nProduces honest work.\n\n"
+				+ "Your clicks produce +1 for every 5 buildings of this type.";
+		itemsInfo[1] = "Breads come from trees.\nYou didn't know that?\n\n"
+				+ "<<>> - A bread tree\n\n"
+				+ "Produces 4 times more breads than a worker.\n\n"
+				+ "Your clicks produce +1 for every 5 buildings of this type.";
+		itemsInfo[2] = "Maybe you think that we collect wheat in order to make bread.\n"
+				+ "Well, no, this farm produces pure bread from the bread plant.\n\n"
+				+ "<<Photosynthesis>> - A bread plant\n\n"
+				+ "Produces 4 times more breads than a bread tree.\n\n"
+				+ "Your clicks produce +1 for every 5 buildings of this type.";
+		itemsInfo[3] = "A bread factory, the peak inginering, so cool.\n"
+				+ "It has no workers in case you were wondering.\n\n"
+				+ "<<Brrrrrrrrrrr>> - The machines inside the factory\n\n"
+				+ "Produces 4 times more breads than a bread farm.\n\n"
+				+ "Your clicks produce +1 for every 5 buildings of this type.";
+
+		infoTextArea = new TextArea();
+		// This way the user can't write on the text area
+		infoTextArea.setEditable(false);
+		bPane.setCenter(infoTextArea);
 		
+		itemsButtons[0].setOnMouseEntered(e ->{
+			infoTextArea.setText(itemsInfo[0]);
+		});
+		
+		itemsButtons[1].setOnMouseEntered(e ->{
+			infoTextArea.setText(itemsInfo[1]);
+		});
+		
+		itemsButtons[2].setOnMouseEntered(e ->{
+			infoTextArea.setText(itemsInfo[2]);
+		});
+		
+		itemsButtons[3].setOnMouseEntered(e ->{
+			infoTextArea.setText(itemsInfo[3]);
+		});
+
 	}
 
 	public void shop() {
 		shopVBox = new VBox();
+		
+		itemsButtons = new Button[4];
 
-		i1 = new Button(MainWindowLogic.itemsPrice[0] + " WORKER");
-		i2 = new Button(MainWindowLogic.itemsPrice[1] + " BREAD TREE");
-		i3 = new Button(MainWindowLogic.itemsPrice[2] + " BREAD FARM");
-		i4 = new Button(MainWindowLogic.itemsPrice[3] + " FACTORY");
+		itemsButtons[0] = new Button(MainWindowLogic.items[0] + " WORKER\n" + MainWindowLogic.itemsPrice[0]);
+		itemsButtons[1] = new Button(MainWindowLogic.items[1] + " BREAD TREE\n" + MainWindowLogic.itemsPrice[1]);
+		itemsButtons[2] = new Button(MainWindowLogic.items[2] + " BREAD FARM\n" + MainWindowLogic.itemsPrice[2]);
+		itemsButtons[3] = new Button(MainWindowLogic.items[3] + " FACTORY\n" + MainWindowLogic.itemsPrice[3]);
+		
+		for (Button b : itemsButtons) {
+			b.setPrefWidth(200);
+			b.setAlignment(Pos.CENTER_LEFT);
+		}
 
-		i1.setOnAction(e -> {
+		itemsButtons[0].setOnAction(e -> {
 			MainWindowLogic.buyItem((byte) 0);
-			i1.setText(MainWindowLogic.itemsPrice[0] + " WORKER");
+			itemsButtons[0].setText(MainWindowLogic.items[0] + " WORKER\n" + MainWindowLogic.itemsPrice[0]);
 			refreshBreadsSecond();
 		});
-		
-		i2.setOnAction(e -> {
+
+		itemsButtons[1].setOnAction(e -> {
 			MainWindowLogic.buyItem((byte) 1);
-			i2.setText(MainWindowLogic.itemsPrice[1] + " BREAD TREE");
+			itemsButtons[1].setText(MainWindowLogic.items[1] + " BREAD TREE\n" + MainWindowLogic.itemsPrice[1]);
 			refreshBreadsSecond();
 		});
-		
-		i3.setOnAction(e -> {
+
+		itemsButtons[2].setOnAction(e -> {
 			MainWindowLogic.buyItem((byte) 2);
-			i3.setText(MainWindowLogic.itemsPrice[2] + " BREAD FARM");
+			itemsButtons[2].setText(MainWindowLogic.items[2] + " BREAD FARM\n" + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
 		});
-		
-		i4.setOnAction(e -> {
+
+		itemsButtons[3].setOnAction(e -> {
 			MainWindowLogic.buyItem((byte) 3);
-			i4.setText(MainWindowLogic.itemsPrice[3] + " FACTORY");
+			itemsButtons[3].setText(MainWindowLogic.items[3] + " FACTORY\n" + MainWindowLogic.itemsPrice[3]);
 			refreshBreadsSecond();
 		});
-		
-		shopVBox.getChildren().addAll(i1, i2, i3, i4);
+
+		shopVBox.getChildren().addAll(itemsButtons[0],itemsButtons[1],itemsButtons[2],itemsButtons[3]);
 		shopVBox.setAlignment(Pos.CENTER_LEFT);
-		bpane.setRight(shopVBox);
+		bPane.setRight(shopVBox);
 
 	}
 
 	public static void refreshBreads() {
 		nBreads.setText("Number of breads: " + (long) MainWindowLogic.breads);
 	}
-	
+
 	public static void refreshBreadsSecond() {
 		MainWindowLogic.calculateBreadsSecond();
-		bSecond.setText(String.format("Breads/s: %.2f",MainWindowLogic.breads));
+		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 	}
 
 	public void inferiorMenu() {
@@ -147,7 +199,7 @@ public class MainWindowFX extends Application {
 
 		menuHBox.getChildren().addAll(donation, ascend, ranking);
 		menuHBox.setAlignment(Pos.CENTER);
-		bpane.setBottom(menuHBox);
+		bPane.setBottom(menuHBox);
 
 	}
 

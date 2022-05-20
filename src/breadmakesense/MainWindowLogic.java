@@ -11,7 +11,7 @@ public class MainWindowLogic {
 	
 	public static double breads;
 	public static double legacyBreads;
-	public static float ascend = 0;
+	public static float ascend = 1;
 	public static int breadsClick = 1;
 	public static float breadsClickAuto;
 	public static float breadsPerSecond;
@@ -22,7 +22,7 @@ public class MainWindowLogic {
 	
 	public static void addClick() {
 		
-		breadsClick = (int) (1+(items[0]/5)+(items[1]/5)+(items[2]/5)+(items[3]/5));
+		breadsClick = (int) ((1+(items[0]/5)+(items[1]/5)+(items[2]/5)+(items[3]/5))*ascend);
 		
 		breads += breadsClick;
 		legacyBreads += breadsClick;
@@ -34,11 +34,14 @@ public class MainWindowLogic {
 			breads -= itemsPrice[item];
 			items[item]++;
 			itemsPrice[item] *= 1.2;
+		} else {
+			MainWindowFX.infoTextArea.setText("You don't have enough breads!");
 		}
 	}
 	
 	public static void calculateBreadsSecond() {
-		breadsPerSecond = breadsClickAuto*60;
+		breadsPerSecond = breadsClickAuto*240;
+		System.out.println(breadsPerSecond + " " + breadsClickAuto + " " + breadsClickAuto*60);
 	}
 	
 	
@@ -64,7 +67,7 @@ public class MainWindowLogic {
 	
 	public static void autoClick()  {
 		//This way we can accurately produce the bread and refresh the counter that the user sees smoothly
-		breadsClickAuto = (float) ((items[0]*0.001)+(items[1]*0.04)+(items[2]*0.016)+(items[3]*0.064));
+		breadsClickAuto = (float) (((items[0]*0.001)+(items[1]*0.04)+(items[2]*0.016)+(items[3]*0.064))*ascend);
 		
 		breads += breadsClickAuto;
 		legacyBreads += breadsClickAuto;
