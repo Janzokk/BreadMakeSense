@@ -22,26 +22,24 @@ public class MainWindowLogic {
 	
 	public static void addClick() {
 		
-		breadsClick = (int) ((1+(items[0]/5)+(items[1]/5)+(items[2]/5)+(items[3]/5))*ascend);
-		
 		breads += breadsClick;
 		legacyBreads += breadsClick;
 		
 	}
 	
-	public static void buyItem(byte item) {
+	public static boolean buyItem(byte item) {
 		if (breads >= itemsPrice[item]) {
 			breads -= itemsPrice[item];
 			items[item]++;
 			itemsPrice[item] *= 1.2;
-		} else {
-			MainWindowFX.infoTextArea.setText("You don't have enough breads!");
+			breadsClick = (int) ((1+(items[0]/5)+(items[1]/5)+(items[2]/5)+(items[3]/5))*ascend);
+			return true;
 		}
+		return false;
 	}
 	
 	public static void calculateBreadsSecond() {
 		breadsPerSecond = breadsClickAuto*240;
-		System.out.println(breadsPerSecond + " " + breadsClickAuto + " " + breadsClickAuto*60);
 	}
 	
 	

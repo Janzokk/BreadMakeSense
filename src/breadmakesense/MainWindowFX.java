@@ -1,6 +1,7 @@
 package breadmakesense;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,6 +30,8 @@ public class MainWindowFX extends Application {
 	Button ranking;
 	
 	Button[] itemsButtons;
+	
+	Label topLabel;
 
 	static TextArea infoTextArea;
 
@@ -48,6 +51,7 @@ public class MainWindowFX extends Application {
 		shop();
 		clickableBread();
 		textArea();
+		topLabel();
 		MainWindowLogic.initalizeAutoClickTimer();
 
 		stage.setTitle("Bread Make Sense");
@@ -55,6 +59,16 @@ public class MainWindowFX extends Application {
 		stage.setScene(mainScene);
 		stage.show();
 
+	}
+	
+	public void topLabel() {
+		topLabel = new Label("User: Ascend value: Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel.setPadding(new Insets(10));
+		bPane.setTop(topLabel);
+	}
+	
+	public void refreshTopLabel() {
+		topLabel.setText("User: Test user Ascend value: 20% Breads per click: " + MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {
@@ -147,27 +161,31 @@ public class MainWindowFX extends Application {
 		}
 
 		itemsButtons[0].setOnAction(e -> {
-			MainWindowLogic.buyItem((byte) 0);
+			if (!MainWindowLogic.buyItem((byte) 0)) infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[0].setText(MainWindowLogic.items[0] + " WORKER\n" + MainWindowLogic.itemsPrice[0]);
 			refreshBreadsSecond();
+			refreshTopLabel();
 		});
 
 		itemsButtons[1].setOnAction(e -> {
-			MainWindowLogic.buyItem((byte) 1);
+			if (!MainWindowLogic.buyItem((byte) 1)) infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[1].setText(MainWindowLogic.items[1] + " BREAD TREE\n" + MainWindowLogic.itemsPrice[1]);
 			refreshBreadsSecond();
+			refreshTopLabel();
 		});
 
 		itemsButtons[2].setOnAction(e -> {
-			MainWindowLogic.buyItem((byte) 2);
+			if (!MainWindowLogic.buyItem((byte) 2)) infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[2].setText(MainWindowLogic.items[2] + " BREAD FARM\n" + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
+			refreshTopLabel();
 		});
 
 		itemsButtons[3].setOnAction(e -> {
-			MainWindowLogic.buyItem((byte) 3);
+			if (!MainWindowLogic.buyItem((byte) 3)) infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[3].setText(MainWindowLogic.items[3] + " FACTORY\n" + MainWindowLogic.itemsPrice[3]);
 			refreshBreadsSecond();
+			refreshTopLabel();
 		});
 
 		shopVBox.getChildren().addAll(itemsButtons[0],itemsButtons[1],itemsButtons[2],itemsButtons[3]);
