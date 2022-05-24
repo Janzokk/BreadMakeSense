@@ -153,6 +153,7 @@ public class MainWindowFX extends Application {
 	}
 
 	public void shop() {
+
 		shopVBox = new VBox();
 		
 		itemsButtons = new Button[4];
@@ -194,9 +195,14 @@ public class MainWindowFX extends Application {
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
+		
+		Label shopText = new Label("Shop");
+		shopText.setFont(new Font("Arial",22));
+		
+		VBox.setMargin(shopText, new Insets(0, 0, 20, 0));
 
-		shopVBox.getChildren().addAll(itemsButtons[0],itemsButtons[1],itemsButtons[2],itemsButtons[3]);
-		shopVBox.setAlignment(Pos.CENTER_LEFT);
+		shopVBox.getChildren().addAll(shopText, itemsButtons[0],itemsButtons[1],itemsButtons[2],itemsButtons[3]);
+		shopVBox.setAlignment(Pos.CENTER);
 		bPane.setRight(shopVBox);
 
 	}

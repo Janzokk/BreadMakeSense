@@ -47,6 +47,10 @@ public class DonationWindow {
 		
 		bPane.setCenter(donationVBox);
 		stage.setScene(mainScene);
+		
+		donate.setOnAction(e ->{
+			
+		});
 
 	}
 	

@@ -9,7 +9,7 @@ public class MainWindowLogic {
 	static Timer autoClickTimer;
 	Timer uploadServerDataTimer;
 	
-	public static double breads = 10000;
+	public static double breads;
 	public static double legacyBreads;
 	public static float ascend = 1;
 	public static int breadsClick = 1;
