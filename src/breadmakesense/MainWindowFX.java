@@ -29,13 +29,14 @@ public class MainWindowFX extends Application {
 	Button ascend;
 	Button ranking;
 	
-	Button[] itemsButtons;
+	static Button[] itemsButtons;
 	
-	Label topLabel;
+	static Label topLabel;
 
 	static TextArea infoTextArea;
 
 	String[] itemsInfo;
+	static String[] itemsNames;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -46,6 +47,8 @@ public class MainWindowFX extends Application {
 
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
+		
+		itemsNames = new String[]{"WORKER","BREAD TREE", "BREAD FARM", "FACTORY"};
 
 		inferiorMenu();
 		shop();
@@ -58,17 +61,21 @@ public class MainWindowFX extends Application {
 
 		stage.setScene(mainScene);
 		stage.show();
+		
+		DonationWindow.inicialize();
+		AscendWindow.inicialize();
+		
 
 	}
 	
 	public void topLabel() {
-		topLabel = new Label("User: Ascend value: Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel = new Label("User: Ascend value: "+MainWindowLogic.ascend+ "% Breads per click: " + MainWindowLogic.breadsClick);
 		topLabel.setPadding(new Insets(10));
 		bPane.setTop(topLabel);
 	}
 	
-	public void refreshTopLabel() {
-		topLabel.setText("User: Test user Ascend value: 20% Breads per click: " + MainWindowLogic.breadsClick);
+	public static void refreshTopLabel() {
+		topLabel.setText("User: Ascend value: "+MainWindowLogic.ascend+ "% Breads per click: " + MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {
@@ -150,10 +157,10 @@ public class MainWindowFX extends Application {
 		
 		itemsButtons = new Button[4];
 
-		itemsButtons[0] = new Button(MainWindowLogic.items[0] + " WORKER\n" + MainWindowLogic.itemsPrice[0]);
-		itemsButtons[1] = new Button(MainWindowLogic.items[1] + " BREAD TREE\n" + MainWindowLogic.itemsPrice[1]);
-		itemsButtons[2] = new Button(MainWindowLogic.items[2] + " BREAD FARM\n" + MainWindowLogic.itemsPrice[2]);
-		itemsButtons[3] = new Button(MainWindowLogic.items[3] + " FACTORY\n" + MainWindowLogic.itemsPrice[3]);
+		itemsButtons[0] = new Button(MainWindowLogic.items[0] + " " + itemsNames[0]+"\n" + MainWindowLogic.itemsPrice[0]);
+		itemsButtons[1] = new Button(MainWindowLogic.items[1] + " " + itemsNames[1]+"\n" + MainWindowLogic.itemsPrice[1]);
+		itemsButtons[2] = new Button(MainWindowLogic.items[2] + " " + itemsNames[2]+"\n" + MainWindowLogic.itemsPrice[2]);
+		itemsButtons[3] = new Button(MainWindowLogic.items[3] + " " + itemsNames[3]+"\n" + MainWindowLogic.itemsPrice[3]);
 		
 		for (Button b : itemsButtons) {
 			b.setPrefWidth(200);
@@ -162,28 +169,28 @@ public class MainWindowFX extends Application {
 
 		itemsButtons[0].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 0)) infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[0].setText(MainWindowLogic.items[0] + " WORKER\n" + MainWindowLogic.itemsPrice[0]);
+			itemsButtons[0].setText(MainWindowLogic.items[0] + " " + itemsNames[0]+"\n" + MainWindowLogic.itemsPrice[0]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
 
 		itemsButtons[1].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 1)) infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[1].setText(MainWindowLogic.items[1] + " BREAD TREE\n" + MainWindowLogic.itemsPrice[1]);
+			itemsButtons[1].setText(MainWindowLogic.items[1] + " " + itemsNames[1]+"\n" + MainWindowLogic.itemsPrice[1]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
 
 		itemsButtons[2].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 2)) infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[2].setText(MainWindowLogic.items[2] + " BREAD FARM\n" + MainWindowLogic.itemsPrice[2]);
+			itemsButtons[2].setText(MainWindowLogic.items[2] + " " + itemsNames[2]+"\n" + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
 
 		itemsButtons[3].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 3)) infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[3].setText(MainWindowLogic.items[3] + " FACTORY\n" + MainWindowLogic.itemsPrice[3]);
+			itemsButtons[3].setText(MainWindowLogic.items[3] + " " + itemsNames[3]+"\n" + MainWindowLogic.itemsPrice[3]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -211,8 +218,8 @@ public class MainWindowFX extends Application {
 		ascend = new Button("ASCEND");
 		ranking = new Button("RANKING");
 
-		donation.setOnAction(e -> System.out.println("A"));
-		ascend.setOnAction(e -> System.out.println("B"));
+		donation.setOnAction(e -> DonationWindow.show());
+		ascend.setOnAction(e -> AscendWindow.show());
 		ranking.setOnAction(e -> System.out.println("C"));
 
 		menuHBox.getChildren().addAll(donation, ascend, ranking);

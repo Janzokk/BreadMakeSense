@@ -9,7 +9,7 @@ public class MainWindowLogic {
 	static Timer autoClickTimer;
 	Timer uploadServerDataTimer;
 	
-	public static double breads;
+	public static double breads = 10000;
 	public static double legacyBreads;
 	public static float ascend = 1;
 	public static int breadsClick = 1;
@@ -18,9 +18,14 @@ public class MainWindowLogic {
 	
 	static int[] items = new int[4];
 	
+	static int[] itemsPriceDefault = {20,500,2500,5000};
+	
 	static int[] itemsPrice = {20,500,2500,5000};
 	
+	
 	public static void addClick() {
+		
+		breadsClick = (int) ((1+(items[0]/5)+(items[1]/5)+(items[2]/5)+(items[3]/5))*ascend);
 		
 		breads += breadsClick;
 		legacyBreads += breadsClick;
