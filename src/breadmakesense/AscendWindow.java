@@ -16,7 +16,7 @@ public class AscendWindow {
 	static Scene mainScene;
 	static BorderPane bPane;
 
-	static Stage stage;
+	static Stage mainStage;
 
 	static Label question;
 	static Label ascendDefinition;
@@ -27,11 +27,12 @@ public class AscendWindow {
 
 	public static void inicialize() {
 
-		stage = new Stage();
+		mainStage = new Stage();
 		questionVBox = new VBox();
 
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 550, 200);
+		mainStage.setTitle("Ascend");
 
 		question = new Label("");
 		ascendDefinition = new Label(
@@ -47,14 +48,14 @@ public class AscendWindow {
 
 		bPane.setCenter(questionVBox);
 
-		stage.setScene(mainScene);
+		mainStage.setScene(mainScene);
 
 		confirmationButton.setOnAction(e -> {
 			MainWindowLogic.ascend += ascendPreview;
 			MainWindowFX.refreshTopLabel();
 			removeData();
 			MainWindowFX.refreshBreadsSecond();
-			stage.close();
+			mainStage.close();
 		});
 
 	}
@@ -66,7 +67,7 @@ public class AscendWindow {
 		question.setText("Do you want to ascend? You are going to earn " + String.format("%.2f", ascendPreview)
 				+ "% of ascend value.\nRemember that you are going to lose ALL PROGRESS.");
 
-		stage.show();
+		mainStage.show();
 	}
 
 	public static void removeData() {

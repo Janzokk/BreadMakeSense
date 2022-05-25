@@ -15,7 +15,7 @@ public class DonationWindow {
 	static Scene mainScene;
 	static BorderPane bPane;
 
-	static Stage stage;
+	static Stage mainStage;
 
 	static VBox donationVBox;
 	
@@ -26,14 +26,14 @@ public class DonationWindow {
 	
 	public static void inicialize() {
 		
-		stage = new Stage();
+		mainStage = new Stage();
 		donationVBox = new VBox();
 		bPane = new BorderPane();
 		
 		donate = new Button("SEND");
 		
 		mainScene = new Scene(bPane, 200, 200);
-		
+		mainStage.setTitle("BREADZUM");
 		toUserField = new TextField();
 		quantityField = new TextField();
 		
@@ -46,7 +46,7 @@ public class DonationWindow {
 		VBox.setMargin(toUserField, new Insets(20,0,20,0));
 		
 		bPane.setCenter(donationVBox);
-		stage.setScene(mainScene);
+		mainStage.setScene(mainScene);
 		
 		donate.setOnAction(e ->{
 			
@@ -56,7 +56,7 @@ public class DonationWindow {
 	
 	public static void show() {
 		
-		stage.show();
+		mainStage.show();
 
 	}
 

@@ -1,5 +1,8 @@
 package breadmakesense;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -47,6 +51,8 @@ public class MainWindowFX extends Application {
 
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
+		mainScene.getStylesheets().add(getClass().getResource("style.css").toString());
+		stage.getIcons().add(new Image("assets//bread.png"));
 		
 		itemsNames = new String[]{"WORKER","BREAD TREE", "BREAD FARM", "FACTORY"};
 
@@ -64,18 +70,18 @@ public class MainWindowFX extends Application {
 		
 		DonationWindow.inicialize();
 		AscendWindow.inicialize();
-		
+		RankingWindow.inicialize();
 
 	}
 	
 	public void topLabel() {
-		topLabel = new Label("User: Ascend value: "+MainWindowLogic.ascend+ "% Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel = new Label("User: Ascend value: "+String.format("%.2f",MainWindowLogic.ascend)+ "% Breads per click: " + MainWindowLogic.breadsClick);
 		topLabel.setPadding(new Insets(10));
 		bPane.setTop(topLabel);
 	}
 	
 	public static void refreshTopLabel() {
-		topLabel.setText("User: Ascend value: "+MainWindowLogic.ascend+ "% Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel.setText("User: Ascend value: "+String.format("%.2f",MainWindowLogic.ascend)+ "% Breads per click: " + MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {
@@ -226,7 +232,7 @@ public class MainWindowFX extends Application {
 
 		donation.setOnAction(e -> DonationWindow.show());
 		ascend.setOnAction(e -> AscendWindow.show());
-		ranking.setOnAction(e -> System.out.println("C"));
+		ranking.setOnAction(e -> RankingWindow.show());
 
 		menuHBox.getChildren().addAll(donation, ascend, ranking);
 		menuHBox.setAlignment(Pos.CENTER);
