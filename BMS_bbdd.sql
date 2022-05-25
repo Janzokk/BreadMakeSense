@@ -12,12 +12,11 @@ create table users (
     id int(4) auto_increment,
     username varchar(35),
     passwd varchar(16) not null,
-    bread bigint(10) default 0,
-    legacy_bread bigint(15) default 0,
-    ascend float(2),
+    bread double default 0,
+    legacy_bread double default 0,
+    ascend float default 1,
     constraint pk_user primary key(id, username)
 )
-
 --
 -- Estructura de la taula `Items`
 --
@@ -50,3 +49,5 @@ create table server (
     vers varchar(3) primary key,
     breads bigint default 0
 )
+
+commit;
