@@ -65,6 +65,7 @@ public class MainWindowFX extends Application {
 		DonationWindow.inicialize();
 		AscendWindow.inicialize();
 		
+		MainWindowLogic.downloadServerData();
 
 	}
 	

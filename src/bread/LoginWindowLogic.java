@@ -40,11 +40,12 @@ public class LoginWindowLogic {
 		startLog();
 		getConfig();
 		initializeBD();
+		checkVersions();
 	}
 
 	public static void getConfig() {
 		try {
-			fr = new FileReader("/home/jpg/Baixades/BreadMakeSense-sqlTesting/config.conf");
+			fr = new FileReader("/media/jpg/5BCC-1467/sintesis/config.conf");
 			br = new BufferedReader(fr);
 
 			String res = "";
@@ -77,20 +78,21 @@ public class LoginWindowLogic {
 
 	public static void checkVersions() {
 		try {
-			ResultSet getVersion = stmt.executeQuery("select vers from server");
+			ResultSet getVersion = stmt.executeQuery("select vers from server limit 1");
 
 			if (!clientVersion.equals(getVersion.getString(1))) {
-
+				logger.severe("The client version isn't up-to-date");
+				System.exit(-1);
 			}
 		} catch (SQLException e) {
-			logger.warning("Cant get version from the server");
+			logger.warning("Can't get version from the server");
 			e.printStackTrace();
 		}
 	}
 
 	public static void startLog() {
 		try {
-			handler = new FileHandler("/home/jpg/Baixades/BreadMakeSense-sqlTesting/default.log");
+			handler = new FileHandler("/media/jpg/5BCC-1467/sintesis/default.log");
 			logger = Logger.getLogger("p1");
 			logger.addHandler(handler);
 		} catch (SecurityException | IOException e) {

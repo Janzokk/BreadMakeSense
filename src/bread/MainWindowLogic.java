@@ -1,5 +1,6 @@
 package bread;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,6 +119,29 @@ public class MainWindowLogic {
 	
 	public static void uploadServerData() {
 		try {
+			PreparedStatement usStmt = LoginWindowLogic.con.prepareStatement("update users set bread = ?, legacy_bread = ?, ascend = ? where username = ?");
+			
+			PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("update items set i1 = ?, i2 = ?, i3 = ?, i4 = ? where user_id = ?");
+			
+			PreparedStatement getUser = LoginWindowLogic.con.prepareStatement("select id from users where username = ?");
+			
+			getUser.setString(1, LoginWindowLogic.username);
+			
+			ResultSet userN = getUser.executeQuery();
+			
+			usStmt.setDouble(1, breads);
+			usStmt.setDouble(2, legacyBreads);
+			usStmt.setFloat(3, ascend);
+			usStmt.setString(4, LoginWindowLogic.username);
+			
+			int cs = 1;
+			for(int i = 0; i<items.length; i++) {
+				itStmt.setInt(cs, i);
+				cs++;
+			}
+			itStmt.setString(5, userN.getString(1));
+			
+			
 			
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();

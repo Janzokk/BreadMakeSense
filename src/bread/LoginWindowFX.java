@@ -30,7 +30,7 @@ public class LoginWindowFX extends Application {
 
 	public void start(Stage pStage) throws Exception {
 		LoginWindowLogic.startLogic();
-
+		
 		bPane = new BorderPane();
 		Scene loginScene = new Scene(bPane, 1280, 720);
 
@@ -114,6 +114,7 @@ public class LoginWindowFX extends Application {
 
 		Label introServerBreads = new Label("Together we have created a total of: ");
 		Label serverBreads = new Label("" + LoginWindowLogic.serverPuntuation());
+		Label version = new Label(""+LoginWindowLogic.clientVersion);
 
 		serverBreads.setFont(new Font("Arial", 30));
 
@@ -123,7 +124,8 @@ public class LoginWindowFX extends Application {
 
 		serverBreadsVBox.setPrefWidth(640);
 
-		serverBreadsVBox.getChildren().addAll(introServerBreads, serverBreads);
+		serverBreadsVBox.getChildren().addAll(introServerBreads, serverBreads, version);
+		
 
 		bPane.setRight(serverBreadsVBox);
 
