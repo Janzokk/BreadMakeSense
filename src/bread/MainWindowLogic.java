@@ -103,8 +103,13 @@ public class MainWindowLogic {
 		int cs = 0;
 		for (int i : items) {
 			i = itRs.getInt(cs);
+			for(int j = 0; j <  i; j++) {
+				itemsPrice[cs] *= 1.2;
+			}
 			cs++;
 		}
+		
+		
 		
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
@@ -112,7 +117,11 @@ public class MainWindowLogic {
 	}
 	
 	public static void uploadServerData() {
-		
+		try {
+			
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
 	}
 
 }
