@@ -9,24 +9,16 @@
 --
 
 create table users (
-    id int(4) auto_increment,
-    username varchar(35),
+    id int(4) auto_increment primary key,
+    username varchar(35) unique,
     passwd varchar(16) not null,
     bread double default 0,
     legacy_bread double default 0,
     ascend float default 1,
-    constraint pk_user primary key(id, username)
-)
---
--- Estructura de la taula `Items`
---
-
-create table items (
-    user_id int primary key,
     i1 int(3) default 0,
     i2 int(3) default 0,
     i3 int(3) default 0,
-    i4 int(3) default 0
+    i4 int(3) default 0;
 )
 
 --
@@ -46,8 +38,7 @@ create table transactions (
 --
 
 create table server (
-    vers varchar(3) primary key,
-    breads bigint default 0
+    vers varchar(3) primary key;
 )
 
 commit;
