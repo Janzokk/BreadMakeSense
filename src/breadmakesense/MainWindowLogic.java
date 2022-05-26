@@ -118,8 +118,8 @@ public class MainWindowLogic {
 
 		for (int i = 0; i < items.length; i++) {
 			items[i] = itRs.getInt(i+1);
-			for(int j = 0; j < i; j++) {
-				if (items[i] != 0) itemsPrice[i] *= 1.2;
+			for(int j = 0; j < items[i]; j++) {
+				itemsPrice[i] *= 1.2;
 			}
 		}
 		

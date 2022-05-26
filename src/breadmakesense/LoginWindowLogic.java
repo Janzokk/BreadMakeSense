@@ -156,7 +156,8 @@ public class LoginWindowLogic {
 	}
 
 	public static boolean loginInCheck(String u, String p) {
-		if (u.trim().equals("") || p.trim().equals("") || u.contains(" ") || p.contains(" ")) {
+		if (u.trim().equals("") || p.trim().equals("") || u.contains(" ") || p.contains(" ") || p.length()>= 16) {
+
 			return true;
 		} else {
 			return false;

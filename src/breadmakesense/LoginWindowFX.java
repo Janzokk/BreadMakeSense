@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -24,6 +25,14 @@ public class LoginWindowFX extends Application {
 
 	Stage pStage;
 
+	Scene loginScene;
+
+	Button subBut;
+
+	TextField tfUser;
+
+	TextField pass;
+
 	public static void main(String[] args) {
 
 		launch(args);
@@ -34,7 +43,7 @@ public class LoginWindowFX extends Application {
 		LoginWindowLogic.startLogic();
 
 		bPane = new BorderPane();
-		Scene loginScene = new Scene(bPane, 1280, 720);
+		loginScene = new Scene(bPane, 1280, 720);
 
 		pStage.setTitle("Login - Bread Make Sense");
 		pStage.setScene(loginScene);
@@ -49,11 +58,11 @@ public class LoginWindowFX extends Application {
 
 	public void loginSection() {
 
-		Button subBut = new Button("Submit");
+		subBut = new Button("Submit");
 		subBut.setDisable(true);
 
-		TextField tfUser = new TextField();
-		TextField pass = new PasswordField();
+		tfUser = new TextField();
+		pass = new PasswordField();
 
 		tfUser.setAlignment(Pos.CENTER);
 		pass.setAlignment(Pos.CENTER);
@@ -82,21 +91,29 @@ public class LoginWindowFX extends Application {
 		});
 
 		subBut.setOnAction(e -> {
-			LoginWindowLogic.attempLogin(tfUser.getText(), pass.getText());
-			if (LoginWindowLogic.incPass) {
-				subBut.setText("Incorrect\npassword");
-
-				delay(1500, () -> subBut.setText("Submit"));
-
-			} else {
-				subBut.setText("STARTING");
-				subBut.setDisable(true);
-				MainWindowFX init = new MainWindowFX();
-				init.inicialize();
-				pStage.hide();
-			}
-
+			attemptLoginProcess();
 		});
+
+		loginScene.setOnKeyReleased(e -> {
+			if (e.getCode() == KeyCode.ENTER) attemptLoginProcess();
+		});
+
+	}
+
+	private void attemptLoginProcess() {
+		LoginWindowLogic.attempLogin(tfUser.getText(), pass.getText());
+		if (LoginWindowLogic.incPass) {
+			subBut.setText("Incorrect\npassword");
+
+			delay(1500, () -> subBut.setText("Submit"));
+
+		} else {
+			subBut.setText("STARTING");
+			subBut.setDisable(true);
+			MainWindowFX init = new MainWindowFX();
+			init.inicialize();
+			pStage.hide();
+		}
 	}
 
 	/**

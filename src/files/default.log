@@ -2,26 +2,15 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-26T13:24:27.273259847Z</date>
-  <millis>1653571467273</millis>
-  <nanos>259847</nanos>
+  <date>2022-05-26T16:55:08.289752952Z</date>
+  <millis>1653584108289</millis>
+  <nanos>752952</nanos>
   <sequence>0</sequence>
   <logger>p1</logger>
-  <level>INFO</level>
+  <level>SEVERE</level>
   <class>breadmakesense.LoginWindowLogic</class>
-  <method>attempLogin</method>
+  <method>initializeBD</method>
   <thread>16</thread>
-  <message>User created</message>
+  <message>Error: Can't connect to database</message>
 </record>
-<record>
-  <date>2022-05-26T13:24:27.297143442Z</date>
-  <millis>1653571467297</millis>
-  <nanos>143442</nanos>
-  <sequence>1</sequence>
-  <logger>p1</logger>
-  <level>INFO</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>attempLogin</method>
-  <thread>16</thread>
-  <message>Connection established</message>
-</record>
+</log>
