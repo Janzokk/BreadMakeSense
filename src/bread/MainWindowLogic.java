@@ -88,7 +88,7 @@ public class MainWindowLogic {
 			
 		PreparedStatement usStmt = LoginWindowLogic.con.prepareStatement("select bread, ascend from users where username = ?");
 		
-		PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("select it.i1, it.i2, it.i3, it.i4 from items as it inner join users as us on it.user_id = us.id where us.username = ?");
+		PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("select it.i1, it.i2, it.i3, it.i4 from users where username = ?");
 		
 		usStmt.setString(1, LoginWindowLogic.username);
 		
@@ -121,13 +121,7 @@ public class MainWindowLogic {
 		try {
 			PreparedStatement usStmt = LoginWindowLogic.con.prepareStatement("update users set bread = ?, legacy_bread = ?, ascend = ? where username = ?");
 			
-			PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("update items set i1 = ?, i2 = ?, i3 = ?, i4 = ? where user_id = ?");
-			
-			PreparedStatement getUser = LoginWindowLogic.con.prepareStatement("select id from users where username = ?");
-			
-			getUser.setString(1, LoginWindowLogic.username);
-			
-			ResultSet userN = getUser.executeQuery();
+			PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("update users set i1 = ?, i2 = ?, i3 = ?, i4 = ? where username = ?");
 			
 			usStmt.setDouble(1, breads);
 			usStmt.setDouble(2, legacyBreads);
@@ -139,9 +133,10 @@ public class MainWindowLogic {
 				itStmt.setInt(cs, i);
 				cs++;
 			}
-			itStmt.setString(5, userN.getString(1));
+			itStmt.setString(5, LoginWindowLogic.username);
 			
-			
+			usStmt.executeQuery();
+			itStmt.executeQuery();
 			
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();

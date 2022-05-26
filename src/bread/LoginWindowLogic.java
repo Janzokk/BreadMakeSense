@@ -136,7 +136,6 @@ public class LoginWindowLogic {
 
 					int newUser = pstmt.executeUpdate();
 					logger.info("User created");
-
 				}
 
 			} catch (Exception e) {
@@ -147,7 +146,7 @@ public class LoginWindowLogic {
 
 	public static long serverPuntuation() {
 		try {
-			ResultSet totalPunt = stmt.executeQuery("select breads from server limit 1");
+			ResultSet totalPunt = stmt.executeQuery("select sum(bread) from users");
 			if (totalPunt.next()) {
 				return totalPunt.getLong(1);
 			}
