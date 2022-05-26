@@ -27,7 +27,6 @@ public class LoginWindowLogic {
 	static HashMap<String, String> hm;
 
 	static String clientVersion = "1.0";
-	long globalBreads = serverPuntuation();
 	static boolean incPass;
 	static String username;
 
@@ -141,11 +140,11 @@ public class LoginWindowLogic {
 		}
 	}
 
-	public static long serverPuntuation() {
+	public static double serverPuntuation() {
 		try {
 			ResultSet totalPunt = stmt.executeQuery("select sum(legacy_bread) from users");
 			if (totalPunt.next()) {
-				return totalPunt.getLong(1);
+				return totalPunt.getDouble(1);
 			}
 		} catch (SQLException e) {
 			logger.info("Can't get total breads");

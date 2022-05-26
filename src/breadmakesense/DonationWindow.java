@@ -1,5 +1,8 @@
 package breadmakesense;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -51,6 +54,13 @@ public class DonationWindow {
 		donate.setOnAction(e ->{
 			
 		});
+		
+		try {
+			PreparedStatement stmt = LoginWindowLogic.con.prepareStatement("");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 	

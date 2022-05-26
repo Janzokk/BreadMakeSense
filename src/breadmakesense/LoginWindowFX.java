@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -52,6 +53,8 @@ public class LoginWindowFX extends Application {
 		serverSection();
 
 		this.pStage = pStage;
+		
+		pStage.getIcons().add(new Image("assets//bread.png"));
 
 		pStage.show();
 	}
@@ -142,7 +145,7 @@ public class LoginWindowFX extends Application {
 	public void serverSection() {
 
 		Label introServerBreads = new Label("Together we have created a total of: ");
-		Label serverBreads = new Label("" + LoginWindowLogic.serverPuntuation() + " breads");
+		Label serverBreads = new Label("" + String.format("%.0f", LoginWindowLogic.serverPuntuation()) + " breads");
 		Label version = new Label("" + LoginWindowLogic.clientVersion);
 
 		serverBreads.setFont(new Font("Arial", 30));

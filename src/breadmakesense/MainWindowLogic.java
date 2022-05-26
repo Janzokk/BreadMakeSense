@@ -73,7 +73,7 @@ public class MainWindowLogic {
 
 	public static void initalizeUploadDataTimer() {
 
-		uploadServerDataTimer = new Timer(10000, e -> {
+		uploadServerDataTimer = new Timer(10000000, e -> {
 			uploadServerData();
 		});
 

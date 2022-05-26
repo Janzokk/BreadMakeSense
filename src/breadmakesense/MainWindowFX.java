@@ -3,10 +3,11 @@ package breadmakesense;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -30,6 +31,8 @@ public class MainWindowFX {
 	static Button donation;
 	static Button ascend;
 	static Button ranking;
+	static Button saveClose;
+	static Button help;
 
 	static Button[] itemsButtons;
 
@@ -47,8 +50,7 @@ public class MainWindowFX {
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
 		mainScene.getStylesheets().add(getClass().getResource("style.css").toString());
-		stage.getIcons().add(new Image("assets//bread.png"));
-
+		
 		itemsNames = new String[] { "WORKER", "BREAD TREE", "BREAD FARM", "FACTORY" };
 
 		inferiorMenu();
@@ -59,7 +61,7 @@ public class MainWindowFX {
 
 		MainWindowLogic.downloadServerData();
 		refreshAllItemButtons();
-
+		refreshTopLabel();
 		MainWindowLogic.initalizeAutoClickTimer();
 		MainWindowLogic.initalizeUploadDataTimer();
 
@@ -98,17 +100,17 @@ public class MainWindowFX {
 		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 		nBreads.setText("Number of breads: " + MainWindowLogic.breads);
 
-		ImageView bread = new ImageView("assets//bread.png");
-
 		clickerVBox = new VBox();
+		
+		ImageView breadImg = new ImageView("assets//bread.png");
 
-		bread.setOnMouseClicked(e -> {
+		breadImg.setOnMouseClicked(e -> {
 			MainWindowLogic.addClick();
 			refreshBreads();
 		});
 
 		clickerVBox.setAlignment(Pos.CENTER);
-		clickerVBox.getChildren().addAll(nBreads, bSecond, bread);
+		clickerVBox.getChildren().addAll(nBreads, bSecond, breadImg);
 		clickerVBox.setPrefWidth(400);
 
 		bPane.setLeft(clickerVBox);
@@ -242,18 +244,31 @@ public class MainWindowFX {
 	}
 
 	public void inferiorMenu() {
+		
+		Alert helpBox = new Alert(AlertType.INFORMATION);
+		helpBox.setTitle("How to play Bread Make Sense");
+		helpBox.setHeaderText("So you don't know how to play");
+		helpBox.setContentText("You have to make bread. To make bread you have to click the bread. When you have enough breads you can buy upgrades (more than one) at the shop that clicks for you. That's it. Happy bread making.");
+		helpBox.setGraphic(new ImageView("assets//breadHelpMenu.png"));
 
 		menuHBox = new HBox();
 
 		donation = new Button("DONATION");
 		ascend = new Button("ASCEND");
 		ranking = new Button("RANKING");
+		saveClose = new Button("SAVE & CLOSE");
+		help = new Button("HELP");
 
 		donation.setOnAction(e -> DonationWindow.show());
 		ascend.setOnAction(e -> AscendWindow.show());
 		ranking.setOnAction(e -> RankingWindow.show());
+		saveClose.setOnAction(e -> {
+			MainWindowLogic.uploadServerData();
+			stage.close();
+		});
+		help.setOnAction(e -> helpBox.show());
 
-		menuHBox.getChildren().addAll(donation, ascend, ranking);
+		menuHBox.getChildren().addAll(donation, ascend, ranking, saveClose, help);
 		menuHBox.setAlignment(Pos.CENTER);
 		bPane.setBottom(menuHBox);
 
