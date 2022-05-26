@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-05-26T17:36:16.258466535Z</date>
+  <millis>1653586576258</millis>
+  <nanos>466535</nanos>
+  <sequence>0</sequence>
+  <logger>p1</logger>
+  <level>WARNING</level>
+  <class>breadmakesense.LoginWindowLogic</class>
+  <method>loginInCheck</method>
+  <thread>16</thread>
+  <message>Username or Password invalid</message>
+</record>
+<record>
+  <date>2022-05-26T17:36:17.396825980Z</date>
+  <millis>1653586577396</millis>
+  <nanos>825980</nanos>
+  <sequence>1</sequence>
+  <logger>p1</logger>
+  <level>INFO</level>
+  <class>breadmakesense.LoginWindowLogic</class>
+  <method>attempLogin</method>
+  <thread>16</thread>
+  <message>Connection established</message>
+</record>

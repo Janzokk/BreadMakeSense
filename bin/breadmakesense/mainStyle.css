@@ -1,0 +1,26 @@
+//Main window css
+.root{
+	-fx-background-color: #1a1a1a;
+	-fx-text-fill: #e6e6e6;
+}
+
+Button{
+	-fx-background-color: #e3c390;
+	-fx-display:flex;
+	-fx-justify-content:space-between;	
+	-fx-border-color: black;
+}
+
+Label{
+	-fx-border-color: black;
+	-fx-background-color: #333333;
+	-fx-text-fill: #cccccc; 
+}
+
+#clickerSect{
+	-fx-background-color: #cccccc;
+}
+
+#botBox{
+	-fx-background-color: #333333;
+}

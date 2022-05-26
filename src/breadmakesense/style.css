@@ -1,0 +1,12 @@
+//css for login window
+.root{
+ 	-fx-background-color: #999999;
+}
+
+VBox{
+	-fx-border-color: black;
+}
+
+VBox:logVBox{
+	-fx-background-color: #111111;
+}
