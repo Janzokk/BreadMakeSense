@@ -98,7 +98,7 @@ public class LoginWindowLogic {
 	}
 
 	public static void attempLogin(String u, String p) {
-
+		
 		username = u;
 		boolean usFound = false, end = false;
 
@@ -128,21 +128,10 @@ public class LoginWindowLogic {
 				}
 				if (!usFound) {
 					PreparedStatement pstmt = con.prepareStatement("insert into users(username, passwd) values(?, ?)");
-					PreparedStatement idUser = con.prepareStatement("select id from users where username = ?");
-					PreparedStatement itStmt = con.prepareStatement("insert into items(user_id) values(?)");
 					pstmt.setString(1, u);
 					pstmt.setString(2, p);
 
-					int newUser = pstmt.executeUpdate();
-
-					idUser.setString(1, username);
-					ResultSet id = idUser.executeQuery();
-
-					id.next();
-					itStmt.setInt(1, id.getInt(1));
-
-					itStmt.executeUpdate();
-
+					pstmt.executeUpdate();
 					logger.info("User created");
 				}
 
@@ -154,7 +143,7 @@ public class LoginWindowLogic {
 
 	public static long serverPuntuation() {
 		try {
-			ResultSet totalPunt = stmt.executeQuery("select breads from server limit 1");
+			ResultSet totalPunt = stmt.executeQuery("select sum(legacy_bread) from users");
 			if (totalPunt.next()) {
 				return totalPunt.getLong(1);
 			}

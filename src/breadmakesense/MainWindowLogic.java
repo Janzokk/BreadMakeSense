@@ -70,10 +70,10 @@ public class MainWindowLogic {
 		autoClickTimer.start();
 
 	}
-	
+
 	public static void initalizeUploadDataTimer() {
 
-		uploadServerDataTimer = new Timer(60000, e -> {
+		uploadServerDataTimer = new Timer(10000, e -> {
 			uploadServerData();
 		});
 
@@ -94,69 +94,62 @@ public class MainWindowLogic {
 
 	public static void downloadServerData() {
 		try {
+			
+		PreparedStatement usStmt = LoginWindowLogic.con.prepareStatement("select bread, ascend, legacy_bread from users where username = ?");
+		
+		PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("select i1, i2, i3, i4 from users where username = ?");
+		
+		usStmt.setString(1, LoginWindowLogic.username);
+		
+		itStmt.setString(1, LoginWindowLogic.username);
+		
+		ResultSet usRs = usStmt.executeQuery();
+		ResultSet itRs = itStmt.executeQuery();
+		
+		usRs.next();
+		itRs.next();
+		
+		breads = usRs.getDouble(1);
+		
+		ascend = usRs.getFloat(2);
+		
+		legacyBreads = usRs.getDouble(3);
+		
 
-			PreparedStatement usStmt = LoginWindowLogic.con
-					.prepareStatement("select bread, ascend from users where username = ?");
-
-			PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement(
-					"select it.i1, it.i2, it.i3, it.i4 from items as it inner join users as us on it.user_id = us.id where us.username = ?");
-
-			usStmt.setString(1, LoginWindowLogic.username);
-
-			itStmt.setString(1, LoginWindowLogic.username);
-
-			ResultSet usRs = usStmt.executeQuery();
-			ResultSet itRs = itStmt.executeQuery();
-
-			usRs.next();
-			breads = usRs.getDouble(1);
-
-			ascend = usRs.getFloat(2);
-			itRs.next();
-			int cs = 0;
-			for (int i = 0; i < items.length; i++) {
-				items[i] = itRs.getInt(cs + 1);
-				// Knowing the number of items the user has we can calculate the price of the
-				// items
-				for (int j = 0; j < items[i]; j++) {
-					itemsPrice[cs] *= 1.2;
-				}
-				cs++;
+		for (int i = 0; i < items.length; i++) {
+			items[i] = itRs.getInt(i+1);
+			for(int j = 0; j < i; j++) {
+				if (items[i] != 0) itemsPrice[i] *= 1.2;
 			}
-
-		} catch (SQLException sqle) {
+		}
+		
+		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
 	}
-
+	
 	public static void uploadServerData() {
 		try {
-			PreparedStatement usStmt = LoginWindowLogic.con
-					.prepareStatement("update users set bread = ?, legacy_bread = ?, ascend = ? where username = ?");
-
-			PreparedStatement itStmt = LoginWindowLogic.con
-					.prepareStatement("update items set i1 = ?, i2 = ?, i3 = ?, i4 = ? where user_id = ?");
-
-			PreparedStatement getUser = LoginWindowLogic.con
-					.prepareStatement("select id from users where username = ?");
-
-			getUser.setString(1, LoginWindowLogic.username);
-
-			ResultSet userN = getUser.executeQuery();
-
+			PreparedStatement usStmt = LoginWindowLogic.con.prepareStatement("update users set bread = ?, legacy_bread = ?, ascend = ? where username = ?");
+			
+			PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("update users set i1 = ?, i2 = ?, i3 = ?, i4 = ? where username = ?");
+			
 			usStmt.setDouble(1, breads);
 			usStmt.setDouble(2, legacyBreads);
 			usStmt.setFloat(3, ascend);
 			usStmt.setString(4, LoginWindowLogic.username);
+			
 
-			int cs = 1;
-			for (int i = 0; i < items.length; i++) {
-				itStmt.setInt(cs, i);
-				cs++;
+			for(int i = 0; i<items.length; i++) {
+				itStmt.setInt(i+1, items[i]);
+
 			}
-			itStmt.setString(5, userN.getString(1));
-
-		} catch (SQLException sqle) {
+			itStmt.setString(5, LoginWindowLogic.username);
+			
+			usStmt.executeUpdate();
+			itStmt.executeUpdate();
+			
+		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
 	}

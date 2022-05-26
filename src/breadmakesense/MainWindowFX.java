@@ -21,15 +21,15 @@ public class MainWindowFX {
 	static BorderPane bPane;
 	static Scene mainScene;
 	static HBox menuHBox;
-	VBox clickerVBox;
-	VBox shopVBox;
+	static VBox clickerVBox;
+	static VBox shopVBox;
 
 	static Label nBreads;
 	static Label bSecond;
 
-	Button donation;
-	Button ascend;
-	Button ranking;
+	static Button donation;
+	static Button ascend;
+	static Button ranking;
 
 	static Button[] itemsButtons;
 
@@ -37,7 +37,7 @@ public class MainWindowFX {
 
 	static TextArea infoTextArea;
 
-	String[] itemsInfo;
+	static String[] itemsInfo;
 	static String[] itemsNames;
 
 	public void inicialize() {
@@ -58,6 +58,7 @@ public class MainWindowFX {
 		topLabel();
 
 		MainWindowLogic.downloadServerData();
+		refreshAllItemButtons();
 
 		MainWindowLogic.initalizeAutoClickTimer();
 		MainWindowLogic.initalizeUploadDataTimer();
@@ -75,15 +76,15 @@ public class MainWindowFX {
 	}
 
 	public void topLabel() {
-		topLabel = new Label("User: " + LoginWindowLogic.username + "Ascend value: " + String.format("%.2f", MainWindowLogic.ascend)
-				+ "% Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel = new Label("User: " + LoginWindowLogic.username + " Ascend value: "
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% Breads per click: " + MainWindowLogic.breadsClick);
 		topLabel.setPadding(new Insets(10));
 		bPane.setTop(topLabel);
 	}
 
 	public static void refreshTopLabel() {
-		topLabel.setText("User: " + LoginWindowLogic.username + " Ascend value: " + String.format("%.2f", MainWindowLogic.ascend) + "% Breads per click: "
-				+ MainWindowLogic.breadsClick);
+		topLabel.setText("User: " + LoginWindowLogic.username + " Ascend value: "
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% Breads per click: " + MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {
@@ -232,6 +233,12 @@ public class MainWindowFX {
 	public static void refreshBreadsSecond() {
 		MainWindowLogic.calculateBreadsSecond();
 		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
+	}
+
+	public static void refreshAllItemButtons() {
+		for (int i = 0; i < itemsButtons.length ; i++) {
+			itemsButtons[i].setText(MainWindowLogic.items[i] + " " + itemsNames[i] + "\n" + MainWindowLogic.itemsPrice[i]);
+		}
 	}
 
 	public void inferiorMenu() {
