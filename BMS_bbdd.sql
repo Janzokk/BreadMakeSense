@@ -18,7 +18,7 @@ create table users (
     i1 int(3) default 0,
     i2 int(3) default 0,
     i3 int(3) default 0,
-    i4 int(3) default 0;
+    i4 int(3) default 0
 )
 
 --
