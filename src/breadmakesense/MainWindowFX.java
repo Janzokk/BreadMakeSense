@@ -85,8 +85,8 @@ public class MainWindowFX {
 	}
 
 	public static void refreshTopLabel() {
-		topLabel.setText("User: " + LoginWindowLogic.username + " Ascend value: "
-				+ String.format("%.2f", MainWindowLogic.ascend) + "% Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel.setText("User: " + LoginWindowLogic.username + " | Ascend value: "
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: " + MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {

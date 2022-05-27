@@ -69,7 +69,7 @@ public class DonationWindow {
 
 		try {
 			checkUserStmt = LoginWindowLogic.con.prepareStatement("SELECT username, id FROM users WHERE username = ?");
-			breadUpdateStmt = LoginWindowLogic.con.prepareStatement("UPDATE users SET bread = ? WHERE username = ?");
+			breadUpdateStmt = LoginWindowLogic.con.prepareStatement("UPDATE users SET bread = bread + ? WHERE username = ?");
 			transactionStmt = LoginWindowLogic.con.prepareStatement(
 					"INSERT INTO transactions (trans_time, donator, recipient, bread) VALUES (NOW(), ?,?,?)");
 		} catch (SQLException e1) {
@@ -99,10 +99,19 @@ public class DonationWindow {
 			ResultSet resultCheckUser = checkUserStmt.executeQuery();
 			if (!resultCheckUser.next()) {
 				transactionErrorInfo.setContentText("This user doesn't exists");
+				transactionErrorInfo.show();
 			} else if (toUserField.getText().equals(LoginWindowLogic.username)) {
 				transactionErrorInfo.setContentText("You can't donate to yourself");
+				transactionErrorInfo.show();
 			} else if (MainWindowLogic.breads < quantity) {
 				transactionErrorInfo.setContentText("You don't have enough breads");
+				transactionErrorInfo.show();
+			} else if (0 > quantity) {
+				transactionErrorInfo.setContentText("You can't steal bread from other people.\nPlus it's ilegal.");
+				transactionErrorInfo.show();
+			} else if (0 == quantity) {
+				transactionErrorInfo.setContentText("Those are your life savings? Impresive...");
+				transactionErrorInfo.show();
 			} else {
 				breadUpdateStmt.setLong(1, Long.parseLong(quantityField.getText()));
 				breadUpdateStmt.setString(2, toUserField.getText());
@@ -119,10 +128,10 @@ public class DonationWindow {
 				transactionInfo.show();
 			}
 
-			transactionErrorInfo.show();
-
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 		} catch (NumberFormatException nfe) {
 			
 			numberParseError.setContentText("You have to put a number, you can't donate "+ quantityField.getText() + " breads.");
