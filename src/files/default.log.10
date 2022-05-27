@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-26T16:11:28.876915157Z</date>
-  <millis>1653581488876</millis>
-  <nanos>915157</nanos>
+  <date>2022-05-27T16:16:36.834191497Z</date>
+  <millis>1653668196834</millis>
+  <nanos>191497</nanos>
   <sequence>0</sequence>
   <logger>p1</logger>
   <level>INFO</level>

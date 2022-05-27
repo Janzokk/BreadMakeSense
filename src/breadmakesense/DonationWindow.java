@@ -1,11 +1,14 @@
 package breadmakesense;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,51 +24,114 @@ public class DonationWindow {
 	static Stage mainStage;
 
 	static VBox donationVBox;
-	
+
 	static TextField toUserField;
 	static TextField quantityField;
-	
+
 	static Button donate;
+
+	static PreparedStatement checkUserStmt;
+	static PreparedStatement breadUpdateStmt;
+	static PreparedStatement transactionStmt;
 	
+	static Alert transactionInfo;
+	static Alert transactionErrorInfo;
+	static Alert numberParseError;
+
 	public static void inicialize() {
-		
+
 		mainStage = new Stage();
 		donationVBox = new VBox();
 		bPane = new BorderPane();
-		
+
 		donate = new Button("SEND");
-		
+
 		mainScene = new Scene(bPane, 200, 200);
 		mainStage.setTitle("BREADZUM");
 		toUserField = new TextField();
 		quantityField = new TextField();
-		
+
 		donationVBox.setAlignment(Pos.CENTER);
-		donationVBox.getChildren().addAll(new Label("To user"), toUserField, new Label("Quantity"), quantityField, donate);
-		
+		donationVBox.getChildren().addAll(new Label("To user"), toUserField, new Label("Quantity"), quantityField,
+				donate);
+
 		donationVBox.setMaxWidth(160);
-		
-		VBox.setMargin(quantityField, new Insets(20,0,20,0));
-		VBox.setMargin(toUserField, new Insets(20,0,20,0));
-		
+
+		VBox.setMargin(quantityField, new Insets(20, 0, 20, 0));
+		VBox.setMargin(toUserField, new Insets(20, 0, 20, 0));
+
 		bPane.setCenter(donationVBox);
 		mainStage.setScene(mainScene);
-		
-		donate.setOnAction(e ->{
-			
+
+		donate.setOnAction(e -> {
+			doTransaction();
 		});
-		
+
 		try {
-			PreparedStatement stmt = LoginWindowLogic.con.prepareStatement("");
+			checkUserStmt = LoginWindowLogic.con.prepareStatement("SELECT username, id FROM users WHERE username = ?");
+			breadUpdateStmt = LoginWindowLogic.con.prepareStatement("UPDATE users SET bread = ? WHERE username = ?");
+			transactionStmt = LoginWindowLogic.con.prepareStatement(
+					"INSERT INTO transactions (trans_time, donator, recipient, bread) VALUES (NOW(), ?,?,?)");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-	}
-	
-	public static void show() {
 		
+		transactionInfo = new Alert(AlertType.INFORMATION);
+		transactionInfo.setTitle("WOW");
+		transactionInfo.setHeaderText("That is so generous!");
+
+		transactionErrorInfo = new Alert(AlertType.WARNING);
+		transactionErrorInfo.setTitle("You didn't put that right");
+		transactionErrorInfo.setHeaderText("You are doing something wrong");
+		
+		numberParseError = new Alert(AlertType.ERROR);
+		numberParseError.setTitle("No, you can't do that");
+		numberParseError.setHeaderText("What are you doing");
+	}
+
+	public static void doTransaction() {
+		try {
+			
+			double quantity = Double.parseDouble(quantityField.getText());
+			
+			checkUserStmt.setString(1, toUserField.getText());
+			ResultSet resultCheckUser = checkUserStmt.executeQuery();
+			if (!resultCheckUser.next()) {
+				transactionErrorInfo.setContentText("This user doesn't exists");
+			} else if (toUserField.getText().equals(LoginWindowLogic.username)) {
+				transactionErrorInfo.setContentText("You can't donate to yourself");
+			} else if (MainWindowLogic.breads < quantity) {
+				transactionErrorInfo.setContentText("You don't have enough breads");
+			} else {
+				breadUpdateStmt.setLong(1, Long.parseLong(quantityField.getText()));
+				breadUpdateStmt.setString(2, toUserField.getText());
+				breadUpdateStmt.executeUpdate();
+
+				transactionStmt.setInt(1, MainWindowLogic.userID);
+				transactionStmt.setInt(2, resultCheckUser.getInt(2));
+				transactionStmt.setLong(3, Long.parseLong(quantityField.getText()));
+				transactionStmt.executeUpdate();
+
+				MainWindowLogic.breads -= quantity;
+
+				transactionInfo.setContentText("Transaction made correctly");
+				transactionInfo.show();
+			}
+
+			transactionErrorInfo.show();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NumberFormatException nfe) {
+			
+			numberParseError.setContentText("You have to put a number, you can't donate "+ quantityField.getText() + " breads.");
+			numberParseError.show();
+		}
+	}
+
+	public static void show() {
+
 		mainStage.show();
 
 	}

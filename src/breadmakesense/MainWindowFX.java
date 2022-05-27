@@ -138,7 +138,7 @@ public class MainWindowFX {
 				+ "Produces 4 times more breads than a bread farm.\n\n"
 				+ "Your clicks produce +1 for every 5 buildings of this type.";
 
-		infoTextArea = new TextArea();
+		infoTextArea = new TextArea(LoginWindowLogic.loginInfo);
 		// This way the user can't write on the text area
 		infoTextArea.setEditable(false);
 		bPane.setCenter(infoTextArea);
@@ -168,13 +168,13 @@ public class MainWindowFX {
 		itemsButtons = new Button[4];
 
 		itemsButtons[0] = new Button(
-				MainWindowLogic.items[0] + " " + itemsNames[0] + "\n" + MainWindowLogic.itemsPrice[0]);
+				MainWindowLogic.items[0] + " " + itemsNames[0] + "\nPrice: " + MainWindowLogic.itemsPrice[0]);
 		itemsButtons[1] = new Button(
-				MainWindowLogic.items[1] + " " + itemsNames[1] + "\n" + MainWindowLogic.itemsPrice[1]);
+				MainWindowLogic.items[1] + " " + itemsNames[1] + "\nPrice: " + MainWindowLogic.itemsPrice[1]);
 		itemsButtons[2] = new Button(
-				MainWindowLogic.items[2] + " " + itemsNames[2] + "\n" + MainWindowLogic.itemsPrice[2]);
+				MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice: " + MainWindowLogic.itemsPrice[2]);
 		itemsButtons[3] = new Button(
-				MainWindowLogic.items[3] + " " + itemsNames[3] + "\n" + MainWindowLogic.itemsPrice[3]);
+				MainWindowLogic.items[3] + " " + itemsNames[3] + "\nPrice: " + MainWindowLogic.itemsPrice[3]);
 
 		for (Button b : itemsButtons) {
 			b.setPrefWidth(200);
@@ -185,7 +185,7 @@ public class MainWindowFX {
 			if (!MainWindowLogic.buyItem((byte) 0))
 				infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[0]
-					.setText(MainWindowLogic.items[0] + " " + itemsNames[0] + "\n" + MainWindowLogic.itemsPrice[0]);
+					.setText(MainWindowLogic.items[0] + " " + itemsNames[0] + "\nPrice: " + MainWindowLogic.itemsPrice[0]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -194,7 +194,7 @@ public class MainWindowFX {
 			if (!MainWindowLogic.buyItem((byte) 1))
 				infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[1]
-					.setText(MainWindowLogic.items[1] + " " + itemsNames[1] + "\n" + MainWindowLogic.itemsPrice[1]);
+					.setText(MainWindowLogic.items[1] + " " + itemsNames[1] + "\nPrice: " + MainWindowLogic.itemsPrice[1]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -203,7 +203,7 @@ public class MainWindowFX {
 			if (!MainWindowLogic.buyItem((byte) 2))
 				infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[2]
-					.setText(MainWindowLogic.items[2] + " " + itemsNames[2] + "\n" + MainWindowLogic.itemsPrice[2]);
+					.setText(MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice:" + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -212,7 +212,7 @@ public class MainWindowFX {
 			if (!MainWindowLogic.buyItem((byte) 3))
 				infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[3]
-					.setText(MainWindowLogic.items[3] + " " + itemsNames[3] + "\n" + MainWindowLogic.itemsPrice[3]);
+					.setText(MainWindowLogic.items[3] + " " + itemsNames[3] + "\nPrice: " + MainWindowLogic.itemsPrice[3]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -239,7 +239,7 @@ public class MainWindowFX {
 
 	public static void refreshAllItemButtons() {
 		for (int i = 0; i < itemsButtons.length ; i++) {
-			itemsButtons[i].setText(MainWindowLogic.items[i] + " " + itemsNames[i] + "\n" + MainWindowLogic.itemsPrice[i]);
+			itemsButtons[i].setText(MainWindowLogic.items[i] + " " + itemsNames[i] + "\nPrice: " + MainWindowLogic.itemsPrice[i]);
 		}
 	}
 

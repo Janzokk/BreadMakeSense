@@ -13,6 +13,7 @@ public class MainWindowLogic {
 	static Timer autoClickTimer;
 	static Timer uploadServerDataTimer;
 
+	public static int userID;
 	public static double breads;
 	public static double legacyBreads;
 	public static float ascend = 1;
@@ -99,15 +100,23 @@ public class MainWindowLogic {
 		
 		PreparedStatement itStmt = LoginWindowLogic.con.prepareStatement("select i1, i2, i3, i4 from users where username = ?");
 		
+		PreparedStatement IDStmt = LoginWindowLogic.con.prepareStatement("select id from users where username = ?");
+		
 		usStmt.setString(1, LoginWindowLogic.username);
 		
 		itStmt.setString(1, LoginWindowLogic.username);
 		
+		IDStmt.setString(1, LoginWindowLogic.username);
+		
 		ResultSet usRs = usStmt.executeQuery();
 		ResultSet itRs = itStmt.executeQuery();
+		ResultSet IDRs = IDStmt.executeQuery();
 		
 		usRs.next();
 		itRs.next();
+		IDRs.next();
+		
+		userID = IDRs.getInt(1);
 		
 		breads = usRs.getDouble(1);
 		

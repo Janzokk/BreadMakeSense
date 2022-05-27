@@ -2,15 +2,14 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-26T17:06:32.330195801Z</date>
-  <millis>1653584792330</millis>
-  <nanos>195801</nanos>
+  <date>2022-05-27T16:42:32.068628553Z</date>
+  <millis>1653669752068</millis>
+  <nanos>628553</nanos>
   <sequence>0</sequence>
   <logger>p1</logger>
   <level>INFO</level>
   <class>breadmakesense.LoginWindowLogic</class>
   <method>attempLogin</method>
   <thread>16</thread>
-  <message>Connection established</message>
+  <message>User created succesfully</message>
 </record>
-</log>
