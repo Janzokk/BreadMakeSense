@@ -1,6 +1,6 @@
 //Main window css
 .root{
-	-fx-background-color: #1a1a1a;
+	-fx-background-color: #293241;
 	-fx-text-fill: #e6e6e6;
 }
 
@@ -12,15 +12,18 @@ Button{
 }
 
 Label{
-	-fx-border-color: black;
-	-fx-background-color: #333333;
-	-fx-text-fill: #cccccc; 
+	-fx-text-fill: #cccccc; 	
 }
 
 #clickerSect{
-	-fx-background-color: #cccccc;
+	-fx-background-color: #98c1d9;	
 }
 
-#botBox{
-	-fx-background-color: #333333;
+#shop{
+	-fx-background-color: #3d5a80;
+} 
+
+#br{
+	-fx-text-fill: #333333;
 }
+

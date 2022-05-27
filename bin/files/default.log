@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-26T14:36:08.877117065Z</date>
-  <millis>1653575768877</millis>
-  <nanos>117065</nanos>
+  <date>2022-05-27T13:52:12.653374121Z</date>
+  <millis>1653659532653</millis>
+  <nanos>374121</nanos>
   <sequence>0</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -14,9 +14,9 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T14:36:08.971437331Z</date>
-  <millis>1653575768971</millis>
-  <nanos>437331</nanos>
+  <date>2022-05-27T13:52:12.871474981Z</date>
+  <millis>1653659532871</millis>
+  <nanos>474981</nanos>
   <sequence>1</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -26,9 +26,9 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T14:36:09.108116264Z</date>
-  <millis>1653575769108</millis>
-  <nanos>116264</nanos>
+  <date>2022-05-27T13:52:13.048905134Z</date>
+  <millis>1653659533048</millis>
+  <nanos>905134</nanos>
   <sequence>2</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -38,10 +38,22 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T14:36:16.569364246Z</date>
-  <millis>1653575776569</millis>
-  <nanos>364246</nanos>
+  <date>2022-05-27T13:52:13.096461983Z</date>
+  <millis>1653659533096</millis>
+  <nanos>461983</nanos>
   <sequence>3</sequence>
+  <logger>p1</logger>
+  <level>WARNING</level>
+  <class>breadmakesense.LoginWindowLogic</class>
+  <method>loginInCheck</method>
+  <thread>16</thread>
+  <message>Username or Password invalid</message>
+</record>
+<record>
+  <date>2022-05-27T13:52:14.766280270Z</date>
+  <millis>1653659534766</millis>
+  <nanos>280270</nanos>
+  <sequence>4</sequence>
   <logger>p1</logger>
   <level>INFO</level>
   <class>breadmakesense.LoginWindowLogic</class>

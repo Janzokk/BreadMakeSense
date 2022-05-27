@@ -62,7 +62,7 @@ public class LoginWindowFX extends Application {
 		pass.setMaxWidth(160);
 
 		loginVBox = new VBox();
-		loginVBox.setId("logVbox");
+		loginVBox.setId("left");
 
 		loginVBox.setAlignment(Pos.CENTER);
 

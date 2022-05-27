@@ -97,6 +97,8 @@ public class MainWindowFX {
 
 		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 		nBreads.setText("Number of breads: " + MainWindowLogic.breads);
+		bSecond.setId("br");
+		nBreads.setId("br");
 
 		ImageView bread = new ImageView("assets//bread.png");
 

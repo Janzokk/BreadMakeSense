@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-26T15:35:59.760797230Z</date>
-  <millis>1653579359760</millis>
-  <nanos>797230</nanos>
+  <date>2022-05-27T14:29:25.967390631Z</date>
+  <millis>1653661765967</millis>
+  <nanos>390631</nanos>
   <sequence>0</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -14,9 +14,9 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T15:35:59.933831507Z</date>
-  <millis>1653579359933</millis>
-  <nanos>831507</nanos>
+  <date>2022-05-27T14:29:26.104795162Z</date>
+  <millis>1653661766104</millis>
+  <nanos>795162</nanos>
   <sequence>1</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -26,9 +26,9 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T15:36:00.030685834Z</date>
-  <millis>1653579360030</millis>
-  <nanos>685834</nanos>
+  <date>2022-05-27T14:29:26.281731027Z</date>
+  <millis>1653661766281</millis>
+  <nanos>731027</nanos>
   <sequence>2</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -38,9 +38,9 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T15:36:00.198955492Z</date>
-  <millis>1653579360198</millis>
-  <nanos>955492</nanos>
+  <date>2022-05-27T14:29:26.432876274Z</date>
+  <millis>1653661766432</millis>
+  <nanos>876274</nanos>
   <sequence>3</sequence>
   <logger>p1</logger>
   <level>WARNING</level>
@@ -50,190 +50,10 @@
   <message>Username or Password invalid</message>
 </record>
 <record>
-  <date>2022-05-26T15:36:00.510286968Z</date>
-  <millis>1653579360510</millis>
-  <nanos>286968</nanos>
+  <date>2022-05-27T14:29:29.009294548Z</date>
+  <millis>1653661769009</millis>
+  <nanos>294548</nanos>
   <sequence>4</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:00.662092691Z</date>
-  <millis>1653579360662</millis>
-  <nanos>92691</nanos>
-  <sequence>5</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:00.798051752Z</date>
-  <millis>1653579360798</millis>
-  <nanos>51752</nanos>
-  <sequence>6</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:00.893840118Z</date>
-  <millis>1653579360893</millis>
-  <nanos>840118</nanos>
-  <sequence>7</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:01.006217706Z</date>
-  <millis>1653579361006</millis>
-  <nanos>217706</nanos>
-  <sequence>8</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:01.134434926Z</date>
-  <millis>1653579361134</millis>
-  <nanos>434926</nanos>
-  <sequence>9</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:01.239675546Z</date>
-  <millis>1653579361239</millis>
-  <nanos>675546</nanos>
-  <sequence>10</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:01.718332689Z</date>
-  <millis>1653579361718</millis>
-  <nanos>332689</nanos>
-  <sequence>11</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:01.974306513Z</date>
-  <millis>1653579361974</millis>
-  <nanos>306513</nanos>
-  <sequence>12</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:02.550001793Z</date>
-  <millis>1653579362550</millis>
-  <nanos>1793</nanos>
-  <sequence>13</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:02.701990975Z</date>
-  <millis>1653579362701</millis>
-  <nanos>990975</nanos>
-  <sequence>14</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:02.870050120Z</date>
-  <millis>1653579362870</millis>
-  <nanos>50120</nanos>
-  <sequence>15</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:02.957702878Z</date>
-  <millis>1653579362957</millis>
-  <nanos>702878</nanos>
-  <sequence>16</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:03.134285817Z</date>
-  <millis>1653579363134</millis>
-  <nanos>285817</nanos>
-  <sequence>17</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:03.245892508Z</date>
-  <millis>1653579363245</millis>
-  <nanos>892508</nanos>
-  <sequence>18</sequence>
-  <logger>p1</logger>
-  <level>WARNING</level>
-  <class>breadmakesense.LoginWindowLogic</class>
-  <method>loginInCheck</method>
-  <thread>16</thread>
-  <message>Username or Password invalid</message>
-</record>
-<record>
-  <date>2022-05-26T15:36:07.570091748Z</date>
-  <millis>1653579367570</millis>
-  <nanos>91748</nanos>
-  <sequence>19</sequence>
   <logger>p1</logger>
   <level>INFO</level>
   <class>breadmakesense.LoginWindowLogic</class>
