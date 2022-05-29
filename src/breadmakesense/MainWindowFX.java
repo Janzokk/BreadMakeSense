@@ -49,6 +49,7 @@ public class MainWindowFX {
 
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
+		mainScene.getStylesheets().add("files//mainStyle.css");
 		mainScene.getStylesheets().add(getClass().getResource("style.css").toString());
 		
 		itemsNames = new String[] { "WORKER", "BREAD TREE", "BREAD FARM", "FACTORY" };
@@ -99,8 +100,11 @@ public class MainWindowFX {
 
 		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 		nBreads.setText("Number of breads: " + MainWindowLogic.breads);
+		bSecond.setId("br");
+		nBreads.setId("br");
 
 		clickerVBox = new VBox();
+		clickerVBox.setId("clickerSect");
 		
 		ImageView breadImg = new ImageView("assets//bread.png");
 
@@ -164,6 +168,7 @@ public class MainWindowFX {
 	public void shop() {
 
 		shopVBox = new VBox();
+		shopVBox.setId("shop");
 
 		itemsButtons = new Button[4];
 

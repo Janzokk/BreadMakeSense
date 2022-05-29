@@ -56,6 +56,7 @@ public class LoginWindowFX extends Application {
 		
 		pStage.getIcons().add(new Image("assets//bread.png"));
 
+		loginScene.getStylesheets().add("files//style.css");
 		pStage.show();
 	}
 
@@ -73,6 +74,7 @@ public class LoginWindowFX extends Application {
 		pass.setMaxWidth(160);
 
 		loginVBox = new VBox();
+		loginVBox.setId("left");
 
 		loginVBox.setAlignment(Pos.CENTER);
 

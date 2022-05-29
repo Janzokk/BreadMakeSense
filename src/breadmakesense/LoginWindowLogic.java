@@ -90,7 +90,7 @@ public class LoginWindowLogic {
 
 	public static void startLog() {
 		try {
-			handler = new FileHandler(System.getProperty("user.dir") + "/src/files/default.log");
+			handler = new FileHandler(System.getProperty("user.dir") + "/src/logs/default.log");
 			logger = Logger.getLogger("p1");
 			logger.addHandler(handler);
 		} catch (SecurityException | IOException e) {
@@ -99,7 +99,7 @@ public class LoginWindowLogic {
 	}
 
 	public static void attempLogin(String u, String p) {
-		
+
 		username = u;
 		boolean usFound = false, end = false;
 
@@ -125,7 +125,7 @@ public class LoginWindowLogic {
 						}
 					}
 				}
-				
+
 				if (!usFound) {
 					PreparedStatement pstmt = con.prepareStatement("insert into users(username, passwd) values(?, ?)");
 					pstmt.setString(1, u);
@@ -160,11 +160,9 @@ public class LoginWindowLogic {
 	}
 
 	public static boolean loginInCheck(String u, String p) {
-		if (u.trim().equals("") || p.trim().equals("") || u.contains(" ") || p.contains(" ") || p.length()>= 16) {
-
+		if (u.trim().equals("") || p.trim().equals("") || u.contains(" ") || p.contains(" ") || p.length() >= 16 || p.length() < 4|| u.length() < 4) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }

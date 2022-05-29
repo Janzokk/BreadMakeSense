@@ -20,6 +20,8 @@ public class MainWindowLogic {
 	public static int breadsClick = 1;
 	public static float breadsClickAuto;
 	public static float breadsPerSecond;
+	
+	private final static int AUTO_SAVE_TIME = 300000;
 
 	static int[] items = new int[4];
 
@@ -73,8 +75,8 @@ public class MainWindowLogic {
 	}
 
 	public static void initalizeUploadDataTimer() {
-
-		uploadServerDataTimer = new Timer(10000000, e -> {
+		//Auto saves every 5 minutes
+		uploadServerDataTimer = new Timer(AUTO_SAVE_TIME, e -> {
 			uploadServerData();
 		});
 
