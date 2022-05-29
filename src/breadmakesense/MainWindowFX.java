@@ -50,8 +50,7 @@ public class MainWindowFX {
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
 		mainScene.getStylesheets().add("files//mainStyle.css");
-		mainScene.getStylesheets().add(getClass().getResource("style.css").toString());
-		
+
 		itemsNames = new String[] { "WORKER", "BREAD TREE", "BREAD FARM", "FACTORY" };
 
 		inferiorMenu();
@@ -75,7 +74,18 @@ public class MainWindowFX {
 		RankingWindow.inicialize();
 
 		stage.show();
-
+		// This piece of code is executed when the app is closed. This saves the game
+		// even if the user closes the app via the "X" button. Difficulting the task of
+		// duplicating breads with the donation option
+		
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+				MainWindowLogic.uploadServerData();
+			}
+		}, "Close app save"));
+		
+		stage.setOnCloseRequest( e -> System.exit(0));
+		
 	}
 
 	public void topLabel() {
@@ -84,10 +94,13 @@ public class MainWindowFX {
 		topLabel.setPadding(new Insets(10));
 		bPane.setTop(topLabel);
 	}
+	
+	
 
 	public static void refreshTopLabel() {
 		topLabel.setText("User: " + LoginWindowLogic.username + " | Ascend value: "
-				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: " + MainWindowLogic.breadsClick);
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: "
+				+ MainWindowLogic.breadsClick);
 	}
 
 	public void clickableBread() {
@@ -105,7 +118,7 @@ public class MainWindowFX {
 
 		clickerVBox = new VBox();
 		clickerVBox.setId("clickerSect");
-		
+
 		ImageView breadImg = new ImageView("assets//bread.png");
 
 		breadImg.setOnMouseClicked(e -> {
@@ -189,8 +202,8 @@ public class MainWindowFX {
 		itemsButtons[0].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 0))
 				infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[0]
-					.setText(MainWindowLogic.items[0] + " " + itemsNames[0] + "\nPrice: " + MainWindowLogic.itemsPrice[0]);
+			itemsButtons[0].setText(
+					MainWindowLogic.items[0] + " " + itemsNames[0] + "\nPrice: " + MainWindowLogic.itemsPrice[0]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -198,8 +211,8 @@ public class MainWindowFX {
 		itemsButtons[1].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 1))
 				infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[1]
-					.setText(MainWindowLogic.items[1] + " " + itemsNames[1] + "\nPrice: " + MainWindowLogic.itemsPrice[1]);
+			itemsButtons[1].setText(
+					MainWindowLogic.items[1] + " " + itemsNames[1] + "\nPrice: " + MainWindowLogic.itemsPrice[1]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -207,8 +220,8 @@ public class MainWindowFX {
 		itemsButtons[2].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 2))
 				infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[2]
-					.setText(MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice:" + MainWindowLogic.itemsPrice[2]);
+			itemsButtons[2].setText(
+					MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice:" + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -216,8 +229,8 @@ public class MainWindowFX {
 		itemsButtons[3].setOnAction(e -> {
 			if (!MainWindowLogic.buyItem((byte) 3))
 				infoTextArea.setText("You don't have enough breads!");
-			itemsButtons[3]
-					.setText(MainWindowLogic.items[3] + " " + itemsNames[3] + "\nPrice: " + MainWindowLogic.itemsPrice[3]);
+			itemsButtons[3].setText(
+					MainWindowLogic.items[3] + " " + itemsNames[3] + "\nPrice: " + MainWindowLogic.itemsPrice[3]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});
@@ -243,17 +256,19 @@ public class MainWindowFX {
 	}
 
 	public static void refreshAllItemButtons() {
-		for (int i = 0; i < itemsButtons.length ; i++) {
-			itemsButtons[i].setText(MainWindowLogic.items[i] + " " + itemsNames[i] + "\nPrice: " + MainWindowLogic.itemsPrice[i]);
+		for (int i = 0; i < itemsButtons.length; i++) {
+			itemsButtons[i].setText(
+					MainWindowLogic.items[i] + " " + itemsNames[i] + "\nPrice: " + MainWindowLogic.itemsPrice[i]);
 		}
 	}
 
 	public void inferiorMenu() {
-		
+
 		Alert helpBox = new Alert(AlertType.INFORMATION);
 		helpBox.setTitle("How to play Bread Make Sense");
 		helpBox.setHeaderText("So you don't know how to play");
-		helpBox.setContentText("You have to make bread. To make bread you have to click the bread. When you have enough breads you can buy upgrades (more than one) at the shop that clicks for you. That's it. Happy bread making.");
+		helpBox.setContentText(
+				"You have to make bread. To make bread you have to click the bread. When you have enough breads you can buy upgrades (more than one) at the shop that clicks for you. That's it. Happy bread making.");
 		helpBox.setGraphic(new ImageView("assets//breadHelpMenu.png"));
 
 		menuHBox = new HBox();
@@ -268,8 +283,8 @@ public class MainWindowFX {
 		ascend.setOnAction(e -> AscendWindow.show());
 		ranking.setOnAction(e -> RankingWindow.show());
 		saveClose.setOnAction(e -> {
-			MainWindowLogic.uploadServerData();
-			stage.close();
+			//We simply call the thread that is executed when closing the program
+			System.exit(0);
 		});
 		help.setOnAction(e -> helpBox.show());
 

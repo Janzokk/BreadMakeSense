@@ -50,7 +50,7 @@ public class MainWindowLogic {
 	}
 
 	public static void calculateBreadsSecond() {
-		breadsPerSecond = breadsClickAuto * 240;
+		breadsPerSecond = breadsClickAuto*System.nanoTime()/60000000;
 	}
 
 	public static void initalizeAutoClickTimer() {
