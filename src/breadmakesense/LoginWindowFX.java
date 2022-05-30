@@ -9,20 +9,34 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author jpg, ferrerjoel
+ * This class is the one that creates the visual part of the Log in Window.
+ */
 public class LoginWindowFX extends Application {
-
+//Global variables declaration
 	BorderPane bPane;
 
 	VBox loginVBox;
-	
+
 	VBox serverBreadsVBox;
 
 	Stage pStage;
+
+	Scene loginScene;
+
+	Button subBut;
+
+	TextField tfUser;
+
+	TextField pass;
 
 	public static void main(String[] args) {
 
@@ -34,7 +48,7 @@ public class LoginWindowFX extends Application {
 		LoginWindowLogic.startLogic();
 
 		bPane = new BorderPane();
-		Scene loginScene = new Scene(bPane, 1280, 720);
+		loginScene = new Scene(bPane, 1280, 720);
 
 		pStage.setTitle("Login - Bread Make Sense");
 		pStage.setScene(loginScene);
@@ -44,18 +58,23 @@ public class LoginWindowFX extends Application {
 
 		this.pStage = pStage;
 		
-		loginScene.getStylesheets().add(getClass().getResource("style.css").toString());
+		pStage.getIcons().add(new Image("assets//bread.png"));
+
+		loginScene.getStylesheets().add("files//style.css");
 		pStage.show();
 	}
-
+	/**
+	 * Builds the left part of the login screen (The one that lets you properly log in)
+	 */
 	public void loginSection() {
-		
-		Button subBut = new Button("Submit");
+		//Create a button and disable it
+		subBut = new Button("Submit");
 		subBut.setDisable(true);
 
-		TextField tfUser = new TextField();
-		TextField pass = new PasswordField();
-
+		tfUser = new TextField();
+		pass = new PasswordField();
+		
+		//Put everything in the middle and ajust the width
 		tfUser.setAlignment(Pos.CENTER);
 		pass.setAlignment(Pos.CENTER);
 		tfUser.setMaxWidth(160);
@@ -74,7 +93,8 @@ public class LoginWindowFX extends Application {
 
 		VBox.setMargin(pass, new Insets(20, 0, 20, 0));
 		VBox.setMargin(tfUser, new Insets(20, 0, 20, 0));
-
+		
+		//When a key is put on any of the text field it checks if it meets the standarts of username/password so it make the button available
 		tfUser.setOnKeyTyped(e -> {
 			subBut.setDisable(LoginWindowLogic.loginInCheck(tfUser.getText(), pass.getText()));
 		});
@@ -82,23 +102,36 @@ public class LoginWindowFX extends Application {
 		pass.setOnKeyTyped(e -> {
 			subBut.setDisable(LoginWindowLogic.loginInCheck(tfUser.getText(), pass.getText()));
 		});
-
+		
+		//When the button is pressed it tries to log in with the username/password that are in the fields
 		subBut.setOnAction(e -> {
-			LoginWindowLogic.attempLogin(tfUser.getText(), pass.getText());
-			if (LoginWindowLogic.incPass) {
-				subBut.setText("Incorrect\npassword");
-
-				delay(1500, () -> subBut.setText("Submit"));
-
-			} else {
-				subBut.setText("STARTING");
-				subBut.setDisable(true);
-				MainWindowFX init = new MainWindowFX();
-				init.inicialize();
-				pStage.hide();
-			}
-
+			attemptLoginProcess();
 		});
+		//Can also try to log in with the "Enter" button
+		loginScene.setOnKeyReleased(e -> {
+			if (e.getCode() == KeyCode.ENTER) attemptLoginProcess();
+		});
+
+	}
+	/**
+	 * Method that calls the Logic method for attemping the login
+	 */
+	private void attemptLoginProcess() {
+		LoginWindowLogic.attempLogin(tfUser.getText(), pass.getText());
+		//if the password is incorrect it changes the button message, waits and return to his original state
+		if (LoginWindowLogic.incPass) {
+			subBut.setText("Incorrect\npassword");
+
+			delay(1500, () -> subBut.setText("Submit"));
+
+		} else {
+			//If everything correct it changes the button message, disables it, start the Main scene and close the Login scene
+			subBut.setText("STARTING");
+			subBut.setDisable(true);
+			MainWindowFX init = new MainWindowFX();
+			init.inicialize();
+			pStage.hide();
+		}
 	}
 
 	/**
@@ -123,11 +156,13 @@ public class LoginWindowFX extends Application {
 		sleeper.setOnSucceeded(event -> continuation.run());
 		new Thread(sleeper).start();
 	}
-
+	/**
+	 * Builds the rigth part of the login scene (the one that says the breads info)
+	 */
 	public void serverSection() {
 
 		Label introServerBreads = new Label("Together we have created a total of: ");
-		Label serverBreads = new Label("" + LoginWindowLogic.serverPuntuation() + " breads");
+		Label serverBreads = new Label("" + String.format("%.0f", LoginWindowLogic.serverPuntuation()) + " breads");
 		Label version = new Label("" + LoginWindowLogic.clientVersion);
 
 		serverBreads.setFont(new Font("Arial", 30));
