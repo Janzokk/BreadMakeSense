@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 /**
  * Creates the visual part of the "log in" window with JavaFX.
+ * 
  * @author Jan Pérez, Joel Ferrer
  * @version 1.0
  */
@@ -45,8 +46,9 @@ public class LoginWindowFX extends Application {
 	TextField tfUser;
 
 	TextField pass;
-	
+
 	Alert help;
+
 	/**
 	 * Main method
 	 */
@@ -55,6 +57,7 @@ public class LoginWindowFX extends Application {
 		launch(args);
 
 	}
+
 	/**
 	 * Starts the JavaFX application
 	 */
@@ -72,46 +75,45 @@ public class LoginWindowFX extends Application {
 		serverSection();
 
 		this.pStage = pStage;
-		
+
 		pStage.getIcons().add(new Image("assets//bread.png"));
 
 		loginScene.getStylesheets().add("files//style.css");
 		pStage.show();
 	}
+
 	/**
-	 * Builds the left part of the login screen (The one that lets you properly log in)
+	 * Builds the left part of the login screen (The one that lets you properly log
+	 * in)
 	 */
 	public void loginSection() {
-		//Create a button for submitting and disable it
+		// Create a button for submitting and disable it
 		subBut = new Button("Submit");
 		subBut.setDisable(true);
-		
+
 		helpBut = new Button("Help");
-		helpBut.setOnAction(e ->{
+		helpBut.setOnAction(e -> {
 			help.show();
 		});
-		
+
 		helpBut.setMinWidth(64);
-		
+
 		buttonsVBox = new HBox();
 		buttonsVBox.getChildren().setAll(subBut, helpBut);
 		buttonsVBox.setAlignment(Pos.CENTER);
-		HBox.setMargin(subBut, new Insets(0,30,0,0));
-		
-		//We create the alert that shows the user/passwd policy
-		
+		HBox.setMargin(subBut, new Insets(0, 30, 0, 0));
+
+		// We create the alert that shows the user/passwd policy
+
 		help = new Alert(AlertType.INFORMATION);
 		help.setHeaderText("User and password policy");
-		help.setContentText("User:\n\n"
-				+ "Minium four characters\n"
-				+ "\nPassword:\n\n"
-				+ "Minimum four characters\n"
-				+ "At least one uppercase letter and one lowercase letter\n"
-				+ "At least one number");
+		help.setContentText("User:\n\n" + "-Minium four characters\n" + "\nPassword:\n\n" + "-Minimum four characterss\n"
+				+ "-At least one uppercase letter and one lowercase letter\n" + "-At least one number\n\n"
+						+ "Made by Joel Ferrer & Jan Pérez - 2022 - Ver. " + LoginWindowLogic.clientVersion);
 
 		tfUser = new TextField();
 		pass = new PasswordField();
-		//Put everything in the middle and ajust the width
+		// Put everything in the middle and ajust the width
 		tfUser.setAlignment(Pos.CENTER);
 		pass.setAlignment(Pos.CENTER);
 		tfUser.setMaxWidth(160);
@@ -130,8 +132,9 @@ public class LoginWindowFX extends Application {
 
 		VBox.setMargin(pass, new Insets(20, 0, 20, 0));
 		VBox.setMargin(tfUser, new Insets(20, 0, 20, 0));
-		
-		//When a key is put on any of the text field it checks if it meets the standarts of username/password so it make the button available
+
+		// When a key is put on any of the text field it checks if it meets the
+		// standarts of username/password so it make the button available
 		tfUser.setOnKeyTyped(e -> {
 			subBut.setDisable(LoginWindowLogic.loginInCheck(tfUser.getText(), pass.getText()));
 		});
@@ -139,16 +142,19 @@ public class LoginWindowFX extends Application {
 		pass.setOnKeyTyped(e -> {
 			subBut.setDisable(LoginWindowLogic.loginInCheck(tfUser.getText(), pass.getText()));
 		});
-		//When the button is pressed it tries to log in with the username/password that are in the fields
+		// When the button is pressed it tries to log in with the username/password that
+		// are in the fields
 		subBut.setOnAction(e -> {
 			attemptLoginProcess();
 		});
-		//Can also try to log in with the "Enter" button
+		// Can also try to log in with the "Enter" button
 		loginScene.setOnKeyReleased(e -> {
-			if (e.getCode() == KeyCode.ENTER && !subBut.isDisabled()) attemptLoginProcess();
+			if (e.getCode() == KeyCode.ENTER && !subBut.isDisabled())
+				attemptLoginProcess();
 		});
 
 	}
+
 	/**
 	 * Method that calls the Logic method for attemping the login
 	 */
@@ -160,7 +166,8 @@ public class LoginWindowFX extends Application {
 			delay(1500, () -> subBut.setText("Submit"));
 
 		} else {
-			//If everything correct it changes the button message, disables it, start the Main scene and close the Login scene
+			// If everything correct it changes the button message, disables it, start the
+			// Main scene and close the Login scene
 			subBut.setText("STARTING");
 			subBut.setDisable(true);
 			MainWindowFX init = new MainWindowFX();
@@ -192,6 +199,7 @@ public class LoginWindowFX extends Application {
 		sleeper.setOnSucceeded(event -> continuation.run());
 		new Thread(sleeper).start();
 	}
+
 	/**
 	 * Builds the right part of the login scene (the one that says the breads info)
 	 */

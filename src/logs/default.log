@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-05-31T17:33:21.492788604Z</date>
+  <millis>1654018401492</millis>
+  <nanos>788604</nanos>
+  <sequence>0</sequence>
+  <logger>breadmakesense</logger>
+  <level>INFO</level>
+  <class>breadmakesense.LoginWindowLogic</class>
+  <method>attempLogin</method>
+  <thread>16</thread>
+  <message>User created succesfully</message>
+</record>
+<record>
+  <date>2022-05-31T17:33:29.032550093Z</date>
+  <millis>1654018409032</millis>
+  <nanos>550093</nanos>
+  <sequence>1</sequence>
+  <logger>breadmakesense</logger>
+  <level>WARNING</level>
+  <class>breadmakesense.DonationWindow</class>
+  <method>doTransaction</method>
+  <thread>16</thread>
+  <message>Invalid number donated.
+For input string: "awdasdas"</message>
+</record>
+</log>

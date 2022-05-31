@@ -134,7 +134,7 @@ public class LoginWindowLogic {
 		// This while is in case the user have to be created it log in automatically
 		while (!end) {
 			try {
-				getUname = stmt.executeQuery("select username, id from users");
+				getUname = stmt.executeQuery("select username from users");
 				// Search for the username
 				while (getUname.next()) {
 					if (u.equals(getUname.getString(1))) {

@@ -8,8 +8,11 @@ public class RankingUser {
 	private String username;
 	private long legacyBread;
 	/**
-	* Builder
-	*/
+	 * Constructor totally parameterized
+	 * @param position Position of the user on the leaderboard (from 1 to 10)
+	 * @param username Name of the account of the user
+	 * @param legacyBread The bread that the user has generated over all time
+	 */
 	public RankingUser(byte position, String username, long legacyBread) {
 		this.position = position;
 		this.username = username;

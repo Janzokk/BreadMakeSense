@@ -19,7 +19,7 @@ public class MainWindowLogic {
 	static Timer autoClickTimer;
 	static Timer uploadServerDataTimer;
 
-	public static int userID;
+	static int userID;
 	/**
 	 * Variable that saves the quantity of breads the user has. While the user will
 	 * only see an integer, internally we save the breads with decimals. This way
@@ -28,29 +28,29 @@ public class MainWindowLogic {
 	 * 
 	 * This also applies to legacybreads
 	 */
-	public static double breads;
+	static double breads;
 	/**
 	 * Total of breads the user has produced over all time. Donations doesn't count
 	 */
-	public static double legacyBreads;
+	static double legacyBreads;
 	/**
 	 * This value is multiplied with all sources of breads (clicks and upgrades)
 	 */
-	public static float ascend = 1;
+	static float ascend = 1;
 	/**
 	 * Quantity of breads generated with one click
 	 */
-	public static int breadsClick = 1;
+	static int breadsClick = 1;
 	/**
 	 * Value added to the total of breads every time the timer (autoClickTimer) is
 	 * executed
 	 */
-	public static float breadsClickAuto;
+	static float breadsClickAuto;
 	/**
 	 * Calculation of breads per second. For technical reasons this value can be not
 	 * accurate with reality
 	 */
-	public static float breadsPerSecond;
+	static float breadsPerSecond;
 	/**
 	 * Time it takes to run a upload to the server. NOTE: this value can't be
 	 * increased because of the limitations of the server. Doing so will result in a
@@ -72,7 +72,7 @@ public class MainWindowLogic {
 	 */
 	private final static float ITEMS_PRICE_RISE = (float) 1.2;
 
-	public static void addClick() {
+	protected static void addClick() {
 
 		breadsClick = (int) ((1 + (items[0] / 5) + (items[1] / 5) + (items[2] / 5) + (items[3] / 5)) * ascend);
 
@@ -103,7 +103,7 @@ public class MainWindowLogic {
 	 * Calculates the breads per second generated.
 	 */
 	public static void calculateBreadsSecond() {
-		breadsPerSecond = breadsClickAuto * System.nanoTime() / 60000000;
+		breadsPerSecond = breadsClickAuto * 320;
 	}
 
 	/**

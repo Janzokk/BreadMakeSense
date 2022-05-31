@@ -65,7 +65,7 @@ public class MainWindowFX {
 
 		bPane = new BorderPane();
 		mainScene = new Scene(bPane, 1280, 720);
-		mainScene.getStylesheets().add("files//mainStsyle.css");
+		mainScene.getStylesheets().add("files//mainStyle.css");
 
 		itemsNames = new String[] { "WORKER", "BREAD TREE", "BREAD FARM", "FACTORY" };
 		// Calls the other initialization methods
@@ -95,8 +95,9 @@ public class MainWindowFX {
 		RankingWindow.inicialize();
 
 		stage.show();
-		
-		// This piece of code is executed when the app is closed or when the system calls System.exit(). This saves the game
+
+		// This piece of code is executed when the app is closed or when the system
+		// calls System.exit(). This saves the game
 		// even if the user closes the app via the "X" button. Difficulting the task of
 		// duplicating breads with the donation option
 
@@ -114,8 +115,9 @@ public class MainWindowFX {
 	 * Inicialitzes the top label of the window.
 	 */
 	public void topLabel() {
-		topLabel = new Label("User: " + LoginWindowLogic.username + " Ascend value: "
-				+ String.format("%.2f", MainWindowLogic.ascend) + "% Breads per click: " + MainWindowLogic.breadsClick);
+		topLabel = new Label("User: " + LoginWindowLogic.username + " | Ascend value: "
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: " + MainWindowLogic.breadsClick
+				+ " | Legacy breads: " + String.format("%.0f" , MainWindowLogic.legacyBreads));
 		topLabel.setPadding(new Insets(10));
 		bPane.setTop(topLabel);
 	}
@@ -125,8 +127,8 @@ public class MainWindowFX {
 	 */
 	public static void refreshTopLabel() {
 		topLabel.setText("User: " + LoginWindowLogic.username + " | Ascend value: "
-				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: "
-				+ MainWindowLogic.breadsClick);
+				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: " + MainWindowLogic.breadsClick
+				+ " | Legacy breads: " + String.format("%.0f" , MainWindowLogic.legacyBreads));
 	}
 
 	/**
@@ -259,7 +261,7 @@ public class MainWindowFX {
 			if (!MainWindowLogic.buyItem((byte) 2))
 				infoTextArea.setText("You don't have enough breads!");
 			itemsButtons[2].setText(
-					MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice:" + MainWindowLogic.itemsPrice[2]);
+					MainWindowLogic.items[2] + " " + itemsNames[2] + "\nPrice: " + MainWindowLogic.itemsPrice[2]);
 			refreshBreadsSecond();
 			refreshTopLabel();
 		});

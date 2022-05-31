@@ -86,7 +86,6 @@ public class DonationWindow {
 			breadUpdateStmt = LoginWindowLogic.con.prepareStatement("UPDATE users SET bread = bread + ? WHERE username = ?");
 			transactionStmt = LoginWindowLogic.con.prepareStatement(
 					"INSERT INTO transactions (trans_time, donator, recipient, bread) VALUES (NOW(), ?,?,?)");
-			LoginWindowLogic.logger.info("Donation completed");
 		} catch (SQLException e1) {
 			LoginWindowLogic.logger.warning("Can't make the transaction.\n"+ e1.getMessage());
 		}
@@ -141,8 +140,11 @@ public class DonationWindow {
 				transactionStmt.executeUpdate();
 
 				MainWindowLogic.breads -= quantity;
-
-				transactionInfo.setContentText("Transaction made correctly");
+				if (quantity == 404) {
+					transactionInfo.setContentText("Breads not found");
+				} else {
+					transactionInfo.setContentText("Transaction made correctly");
+				}
 				transactionInfo.show();
 			}
 

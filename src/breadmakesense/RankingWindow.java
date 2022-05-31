@@ -13,9 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 /**
-* Class used to create the ranking section
-*/
+ * Class used to create a view of the top ten users from the server. Sorting by
+ * the number of breads they have generated over all time
+ */
 public class RankingWindow {
 //Global variables declaration
 	static Stage mainStage;
@@ -30,10 +32,10 @@ public class RankingWindow {
 	static PreparedStatement rankingStmt;
 
 	static ObservableList<RankingUser> observableUserRanking;
-	
+
 	/**
-	* Initialize the window and the table so we can use them later
-	*/
+	 * Initialize the window and the table so we can use them later
+	 */
 	@SuppressWarnings("unchecked")
 	public static void inicialize() {
 
@@ -41,15 +43,15 @@ public class RankingWindow {
 		bPane = new BorderPane();
 		rankingVBox = new VBox();
 		rankingTable = new TableView<RankingUser>();
-		//Content
-		rankingScene = new Scene(bPane, 300, 350);
+		// Content
+		rankingScene = new Scene(bPane, 340, 280);
 		mainStage.setTitle("Best bread makers of all time");
 		mainStage.setResizable(false);
 
 		mainStage.setScene(rankingScene);
 
 		bPane.setCenter(rankingVBox);
-		
+
 		rankingVBox.getChildren().add(rankingTable);
 
 		prepareResultSet();
@@ -60,7 +62,7 @@ public class RankingWindow {
 		TableColumn<RankingUser, String> col1 = new TableColumn<RankingUser, String>("Position");
 		TableColumn<RankingUser, String> col2 = new TableColumn<RankingUser, String>("User");
 		TableColumn<RankingUser, String> col3 = new TableColumn<RankingUser, String>("Legacy breads");
-		
+
 		col1.setCellValueFactory(new PropertyValueFactory<RankingUser, String>("position"));
 		col2.setCellValueFactory(new PropertyValueFactory<RankingUser, String>("username"));
 		col3.setCellValueFactory(new PropertyValueFactory<RankingUser, String>("legacyBread"));
@@ -68,9 +70,10 @@ public class RankingWindow {
 		rankingTable.getColumns().addAll(col1, col2, col3);
 
 	}
+
 	/**
-	* Creates the resultSet that will show the users and their punctuation
-	*/
+	 * Creates the resultSet that will show the users and their punctuation
+	 */
 	private static void prepareResultSet() {
 
 		try {
@@ -81,11 +84,13 @@ public class RankingWindow {
 		}
 
 	}
+
 	/**
-	* Shows the ten first ranked users every time the user opens the window (updating the previous results)
-	*/
+	 * Shows the ten first ranked users every time the user opens the window
+	 * (updating the previous results)
+	 */
 	public static void show() {
-		
+
 		try {
 			observableUserRanking.clear();
 			rankingTable.getItems().clear();
@@ -94,10 +99,11 @@ public class RankingWindow {
 			ranking.next();
 			// We add each user to the table
 			for (int i = 0; i < 10; i++) {
-				observableUserRanking.add(new RankingUser((byte) (i+1), ranking.getString(1), (long) ranking.getDouble(2)));
+				observableUserRanking
+						.add(new RankingUser((byte) (i + 1), ranking.getString(1), (long) ranking.getDouble(2)));
 				ranking.next();
 			}
-			rankingTable.getItems().addAll(observableUserRanking); 
+			rankingTable.getItems().addAll(observableUserRanking);
 		} catch (SQLException e) {
 			LoginWindowLogic.logger.warning("Can't get the users info from server.\n" + e.getMessage());
 		}
