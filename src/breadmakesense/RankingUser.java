@@ -36,7 +36,7 @@ public class RankingUser {
 	public double getLegacyBread() {
 		return legacyBread;
 	}
-//Setters
+	//Setters
 	/**
 	 * @param position the position to set
 	 */

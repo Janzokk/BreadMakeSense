@@ -28,8 +28,13 @@ public class LoginWindowLogic {
 	static Logger logger;
 	static FileReader fr;
 	static BufferedReader br;
+	/**
+	 * We save the key/value of the file configuration here
+	 */
 	static HashMap<String, String> hm;
-
+	/**
+	 * This parameter is used to compare the version of the client and the server. This parameter should only be changed via coding when a new version is being developed
+	 */
 	static String clientVersion = "1.0";
 	static boolean incPass;
 	static String username;
@@ -189,7 +194,7 @@ public class LoginWindowLogic {
 	}
 
 	/**
-	 * Checks if the username or the password have the requeriments
+	 * Checks if the username or the password comply the minium requeriments
 	 * 
 	 * @param u The username
 	 * @param p The password

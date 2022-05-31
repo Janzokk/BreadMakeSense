@@ -16,8 +16,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Core window of the program, contains the principal game and the buttons
- * to access {@link AscendWindow}, {@link DonationWindow}, {@link RankingWindow}
+ * Core window of the program, contains the principal game and the buttons to
+ * access {@link AscendWindow}, {@link DonationWindow}, {@link RankingWindow}
+ * 
  * @author Jan Pérez, Joel Ferrer
  * @version 1.0
  */
@@ -30,8 +31,13 @@ public class MainWindowFX {
 	static HBox menuHBox;
 	static VBox clickerVBox;
 	static VBox shopVBox;
-
+	/**
+	 * Number of breads the user has
+	 */
 	static Label nBreads;
+	/**
+	 * Label that shows the breads per second
+	 */
 	static Label bSecond;
 
 	static Button donation;
@@ -68,24 +74,29 @@ public class MainWindowFX {
 		clickableBread();
 		textArea();
 		topLabel();
-		
+
 		MainWindowLogic.downloadServerData();
-		// Since we downloaded the data we have to refresh the visual items that requires them
+		// Since we downloaded the data we have to refresh the visual items that
+		// requires them
 		refreshAllItemButtons();
 		refreshTopLabel();
+		// Upon login we start the auto click timer (that is going to call a method for
+		// doing one click) and the auto save timer that is going to upload the user
+		// data to the server
 		MainWindowLogic.initalizeAutoClickTimer();
 		MainWindowLogic.initalizeUploadDataTimer();
 
 		stage.setTitle("Bread Make Sense");
 
 		stage.setScene(mainScene);
-
+		// We inicialize the scenes of the inferior menu (help is an alert, not a scene)
 		DonationWindow.inicialize();
 		AscendWindow.inicialize();
 		RankingWindow.inicialize();
 
 		stage.show();
-		// This piece of code is executed when the app is closed. This saves the game
+		
+		// This piece of code is executed when the app is closed or when the system calls System.exit(). This saves the game
 		// even if the user closes the app via the "X" button. Difficulting the task of
 		// duplicating breads with the donation option
 
@@ -117,8 +128,10 @@ public class MainWindowFX {
 				+ String.format("%.2f", MainWindowLogic.ascend) + "% | Breads per click: "
 				+ MainWindowLogic.breadsClick);
 	}
+
 	/**
-	 * Inicialitzes the left section of the window. Containing the clicable bread, the quantity and the breads per second.
+	 * Inicialitzes the left section of the window. Containing the clicable bread,
+	 * the quantity and the breads per second.
 	 */
 	public void clickableBread() {
 
@@ -137,7 +150,7 @@ public class MainWindowFX {
 		clickerVBox.setId("clickerSect");
 		// Image of the clicable bread
 		ImageView breadImg = new ImageView("assets//bread.png");
-
+		// Action when clicking the bread
 		breadImg.setOnMouseClicked(e -> {
 			MainWindowLogic.addClick();
 			refreshBreads();
@@ -150,8 +163,10 @@ public class MainWindowFX {
 		bPane.setLeft(clickerVBox);
 
 	}
+
 	/**
-	 * Inicialitzes the text area of the center of the window and the description of the items.
+	 * Inicialitzes the text area of the center of the window and the description of
+	 * the items.
 	 */
 	public void textArea() {
 
@@ -196,8 +211,10 @@ public class MainWindowFX {
 		});
 
 	}
+
 	/**
-	 * Inicialitzes the shop on the right of the window and his respective components.
+	 * Inicialitzes the shop on the right of the window and his respective
+	 * components.
 	 */
 	public void shop() {
 
@@ -266,19 +283,24 @@ public class MainWindowFX {
 		bPane.setRight(shopVBox);
 
 	}
+
 	/**
-	 * Refreshes the number of breads the user sees on the top of the breads per second.
+	 * Refreshes the number of breads the user sees on the top of the breads per
+	 * second.
 	 */
 	public static void refreshBreads() {
 		nBreads.setText("Number of breads: " + (long) MainWindowLogic.breads);
 	}
+
 	/**
-	 * Refreshes the number of breads per second the user sees on the top of the bread.
+	 * Refreshes the number of breads per second the user sees on the top of the
+	 * bread.
 	 */
 	public static void refreshBreadsSecond() {
 		MainWindowLogic.calculateBreadsSecond();
 		bSecond.setText(String.format("Breads/s: %.2f", MainWindowLogic.breadsPerSecond));
 	}
+
 	/**
 	 * Refreshes the information of every item shown in the buttons
 	 */
@@ -288,6 +310,7 @@ public class MainWindowFX {
 					MainWindowLogic.items[i] + " " + itemsNames[i] + "\nPrice: " + MainWindowLogic.itemsPrice[i]);
 		}
 	}
+
 	/**
 	 * Inicialitzes the inferior menu and all his components
 	 */
@@ -301,13 +324,13 @@ public class MainWindowFX {
 		helpBox.setGraphic(new ImageView("assets//breadHelpMenu.png"));
 
 		menuHBox = new HBox();
-
+		// Initialization of the buttons on the inferior menu
 		donation = new Button("DONATION");
 		ascend = new Button("ASCEND");
 		ranking = new Button("RANKING");
 		saveClose = new Button("SAVE & CLOSE");
 		help = new Button("HELP");
-
+		// Actions of the buttons
 		donation.setOnAction(e -> DonationWindow.show());
 		ascend.setOnAction(e -> AscendWindow.show());
 		ranking.setOnAction(e -> RankingWindow.show());

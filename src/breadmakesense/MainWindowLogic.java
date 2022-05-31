@@ -22,24 +22,55 @@ public class MainWindowLogic {
 	public static int userID;
 	/**
 	 * Variable that saves the quantity of breads the user has. While the user will
-	 * only se an integer, internally we save the breads with decimals. This way the
-	 * bread counter goes smoothly and we can calculate more complex operations like
-	 * the and system.
+	 * only see an integer, internally we save the breads with decimals. This way
+	 * the bread counter goes smoothly and we can calculate more complex operations
+	 * like the ascend system.
+	 * 
+	 * This also applies to legacybreads
 	 */
 	public static double breads;
+	/**
+	 * Total of breads the user has produced over all time. Donations doesn't count
+	 */
 	public static double legacyBreads;
+	/**
+	 * This value is multiplied with all sources of breads (clicks and upgrades)
+	 */
 	public static float ascend = 1;
+	/**
+	 * Quantity of breads generated with one click
+	 */
 	public static int breadsClick = 1;
+	/**
+	 * Value added to the total of breads every time the timer (autoClickTimer) is
+	 * executed
+	 */
 	public static float breadsClickAuto;
+	/**
+	 * Calculation of breads per second. For technical reasons this value can be not
+	 * accurate with reality
+	 */
 	public static float breadsPerSecond;
-
+	/**
+	 * Time it takes to run a upload to the server. NOTE: this value can't be
+	 * increased because of the limitations of the server. Doing so will result in a
+	 * disconnection mid-game. Losing all contact with the server and not being able
+	 * to save data
+	 */
 	private final static int AUTO_SAVE_TIME = 60000;
 
 	static int[] items = new int[4];
-
+	/**
+	 * Default price for the items, just for reference to re-calculate the price of
+	 * the items when downloading data
+	 */
 	static int[] itemsPriceDefault = { 20, 500, 2500, 5000 };
 
 	static int[] itemsPrice = { 20, 500, 2500, 5000 };
+	/**
+	 * Every time the user buys an item it's price is multiplied by this value
+	 */
+	private final static float ITEMS_PRICE_RISE = (float) 1.2;
 
 	public static void addClick() {
 
@@ -61,7 +92,7 @@ public class MainWindowLogic {
 		if (breads >= itemsPrice[item]) {
 			breads -= itemsPrice[item];
 			items[item]++;
-			itemsPrice[item] *= 1.2;
+			itemsPrice[item] *= ITEMS_PRICE_RISE;
 			breadsClick = (int) ((1 + (items[0] / 5) + (items[1] / 5) + (items[2] / 5) + (items[3] / 5)) * ascend);
 			return true;
 		}
@@ -143,7 +174,7 @@ public class MainWindowLogic {
 			itStmt.setString(1, LoginWindowLogic.username);
 
 			IDStmt.setString(1, LoginWindowLogic.username);
-
+			// We get the essential user data from the server
 			ResultSet usRs = usStmt.executeQuery();
 			ResultSet itRs = itStmt.executeQuery();
 			ResultSet IDRs = IDStmt.executeQuery();
@@ -151,7 +182,7 @@ public class MainWindowLogic {
 			usRs.next();
 			itRs.next();
 			IDRs.next();
-
+			// We put this data into their respective variables
 			userID = IDRs.getInt(1);
 
 			breads = usRs.getDouble(1);
@@ -159,11 +190,12 @@ public class MainWindowLogic {
 			ascend = usRs.getFloat(2);
 
 			legacyBreads = usRs.getDouble(3);
-
+			// If the user has already bought items on the shop before, we have to
+			// re-calculate the price of these items
 			for (int i = 0; i < items.length; i++) {
 				items[i] = itRs.getInt(i + 1);
 				for (int j = 0; j < items[i]; j++) {
-					itemsPrice[i] *= 1.2;
+					itemsPrice[i] *= ITEMS_PRICE_RISE;
 				}
 			}
 
@@ -173,7 +205,7 @@ public class MainWindowLogic {
 	}
 
 	/**
-	 * Upload all the client data to the database.qqqqqqqqqqqqqqqqqqqqqqq
+	 * Upload all the client data to the database.
 	 */
 	public static void uploadServerData() {
 		try {
@@ -193,7 +225,7 @@ public class MainWindowLogic {
 
 			}
 			itStmt.setString(5, LoginWindowLogic.username);
-
+			// We upload the user data to the server
 			usStmt.executeUpdate();
 			itStmt.executeUpdate();
 

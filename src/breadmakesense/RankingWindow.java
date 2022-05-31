@@ -82,15 +82,17 @@ public class RankingWindow {
 
 	}
 	/**
-	* Shows the ten first ranked users
+	* Shows the ten first ranked users every time the user opens the window (updating the previous results)
 	*/
 	public static void show() {
 		
 		try {
 			observableUserRanking.clear();
 			rankingTable.getItems().clear();
+			// We update the previous data
 			ResultSet ranking = rankingStmt.executeQuery();
 			ranking.next();
+			// We add each user to the table
 			for (int i = 0; i < 10; i++) {
 				observableUserRanking.add(new RankingUser((byte) (i+1), ranking.getString(1), (long) ranking.getDouble(2)));
 				ranking.next();

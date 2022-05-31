@@ -36,7 +36,9 @@ public class LoginWindowFX extends Application {
 	Stage pStage;
 
 	Scene loginScene;
-
+	/**
+	 * Submit button
+	 */
 	Button subBut;
 	Button helpBut;
 
@@ -206,7 +208,7 @@ public class LoginWindowFX extends Application {
 		serverBreadsVBox.setAlignment(Pos.CENTER);
 
 		serverBreadsVBox.setPrefWidth(640);
-
+		// We add all the labels to the VBox of the server section
 		serverBreadsVBox.getChildren().addAll(introServerBreads, serverBreads, version);
 
 		bPane.setRight(serverBreadsVBox);

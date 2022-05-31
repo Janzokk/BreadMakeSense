@@ -31,9 +31,17 @@ public class DonationWindow {
 	static TextField quantityField;
 
 	static Button donate;
-
+	/**
+	 * Statement that saves the query for checking if the introduced user exists 
+	 */
 	static PreparedStatement checkUserStmt;
+	/**
+	 * Sends the breads to the other player
+	 */
 	static PreparedStatement breadUpdateStmt;
+	/**
+	 * Creates a row on the transactions table with the basic information of the transaction
+	 */
 	static PreparedStatement transactionStmt;
 	
 	static Alert transactionInfo;
