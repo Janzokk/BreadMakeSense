@@ -6,6 +6,6 @@ In this game You have to make bread. To make bread you have to click the bread. 
 
 Is very interesting and fun
 
-This is our first game and is a final project for college (so pls dont be to harsh), we will update probablly to improve or fix some functions
+This is our first game and a final project for college (so pls dont be to harsh), we will update probablly to improve or fix some functions
 
 All copyright deserved to J&J company (aka ours)
