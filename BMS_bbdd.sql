@@ -39,5 +39,5 @@ create table transactions (
 --
 
 create table server (
-    vers varchar(3) primary key;
+    vers varchar(3) primary key
 )
