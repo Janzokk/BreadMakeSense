@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-06-01T16:40:32.244237738Z</date>
+  <millis>1654101632244</millis>
+  <nanos>237738</nanos>
+  <sequence>0</sequence>
+  <logger>breadmakesense</logger>
+  <level>INFO</level>
+  <class>breadmakesense.LoginWindowLogic</class>
+  <method>attempLogin</method>
+  <thread>16</thread>
+  <message>User created succesfully</message>
+</record>
+</log>
