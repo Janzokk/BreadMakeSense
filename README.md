@@ -9,3 +9,5 @@ Is very interesting and fun
 This is our first game and a final project for college (so pls dont be to harsh), we will update probablly to improve or fix some functions
 
 All copyright deserved to J&J company (aka ours)
+
+Servers currently down
